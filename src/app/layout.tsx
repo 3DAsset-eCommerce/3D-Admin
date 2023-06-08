@@ -1,7 +1,7 @@
-import SideNav from '@/common/SideNav'
+import SideNav from '@/components/common/SideNav'
 import '@/styles/globals.css'
 import { Inter } from 'next/font/google'
-import Header from '@/common/Header'
+import Header from '@/components/common/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,10 +14,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko" className={inter.className}>
       <body>
-        <div className="flex h-screen ">
-          {/* @ts-expect-error Async Server Component */}
+        <div className="flex h-screen">
           <SideNav />
-          <div className="w-full ml-[24.4rem]">
+          <div className="w-full ml-[24rem]">
             <Header />
             <main className="min-h-[calc(100vh-7.2rem)] mt-[7.2rem] bg-bg-2">{children}</main>
           </div>
