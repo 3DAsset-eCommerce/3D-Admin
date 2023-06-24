@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer utilities {
-  @variants responsive {
     /* Hide scrollbar for Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -14,7 +13,7 @@
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
     }
-  }
+  
 }
 
 html {
@@ -22,10 +21,12 @@ html {
 }
 
 body {
-  min-width: 1080px;
+  min-width: 1080px; /* 1080 */
+  width: 1480px;
   min-height: 100vh;
   overflow-y: auto;
   font-size: 1.6rem;
+  background-color: rgb(35 38 45);
 }
 
 * {

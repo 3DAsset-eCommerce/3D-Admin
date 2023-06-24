@@ -10,6 +10,9 @@
     "commit": "git-cz"
   },
   "dependencies": {
+    "@react-aria/listbox": "^3.9.1",
+    "@react-aria/select": "^3.10.1",
+    "@react-stately/select": "^3.5.1",
     "@types/node": "20.2.5",
     "@types/react": "18.2.9",
     "@types/react-dom": "18.2.4",
