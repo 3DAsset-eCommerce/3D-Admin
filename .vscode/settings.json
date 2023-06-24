@@ -1,0 +1,6 @@
+{
+  "prettier.enableDebugLogs": true,
+  "prettier.resolveGlobalModules": true,
+  "prettier.withNodeModules": true,
+  "prettier.useTabs": true
+}
