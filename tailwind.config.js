@@ -27,6 +27,9 @@ module.exports = {
       lg: '2.4rem',
       xl: '3.2rem',
     },
+    borderRadius: {
+      DEFAULT: '0.4rem'
+    },
     extend: {
       colors: {
         primary: {
