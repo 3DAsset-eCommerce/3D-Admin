@@ -1,5 +1,8 @@
+/**
+ * 에셋 조회/수정 페이지
+ */
 import React from 'react'
-import Header from '@/components/Header'
+import Header from '@/components/Header/Index'
 import Body from '@/components/Body'
 import TableContainer from '@/components/Table/TableContainer'
 import TableItem from '@/components/Table/TableItem'
@@ -37,11 +40,11 @@ export default function AssetsPage() {
 
   return (
     <>
-      <Header title='에셋 조회/수정' required={false} isButton={false}/>
+      <Header title="에셋 조회/수정" required={false} isButton={false} />
       <Body>
         <TableContainer>
-          <TableItem title='검색어' required={false} >
-            <div className='flex gap-[6.4rem]'>
+          <TableItem title="검색어" required={false}>
+            <div className="flex gap-[6.4rem]">
               <label htmlFor="assetId">
                 <span className='pr-[1.6rem] text-[1.4rem]'>상품번호</span>
                 <input type="text" id='assetId' className='rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] py-[0.9rem] text-[1.4rem] focus:border-neutral-navy-200'/>
@@ -49,6 +52,7 @@ export default function AssetsPage() {
               <label htmlFor="assetName">
                 <span className='pr-[1.6rem] text-[1.4rem]'>상품명</span>
                 <input type="text" id='assetName' className='rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] py-[0.9rem] text-[1.4rem] focus:border-neutral-navy-200'/>
+
               </label>
             </div>
             <div></div>
@@ -62,11 +66,16 @@ export default function AssetsPage() {
               <Radio value='판매중'>판매중</Radio>
               <Radio value='판매중지'>판매중지</Radio>
             </RadioGroup>
+
           </TableItem>
         </TableContainer>
-        <div className='buttonContainer flex gap-[1.6rem] mt-[5rem] justify-center'>
-          <Button width={12.5} height={3.6} >검색</Button>
-          <Button width={12.5} height={3.6} backgroundColor='transparent' borderColor='#60AFFF'>초기화</Button>
+        <div className="buttonContainer flex gap-[1.6rem] mt-[5rem] justify-center">
+          <Button width={12.5} height={3.6}>
+            검색
+          </Button>
+          <Button width={12.5} height={3.6} backgroundColor="transparent" borderColor="#60AFFF">
+            초기화
+          </Button>
         </div>
         </Body>
         <Divider/>
@@ -90,22 +99,7 @@ export default function AssetsPage() {
                   <th className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'>최종수정일</th>
                   <th className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'>수정</th>
                 </tr>
-              </thead>
-              <tbody>
-              {<tr className='grid grid-cols-[1.5fr_3fr_9fr_3fr_2.5fr_5fr_5fr_4fr_4fr_2fr] grid-rows-[4.2rem] w-full'>
-                <td className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'></td>
-                <td className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'>{'00000001'}</td>
-                <td className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'>{'Girl Running'}</td>
-                <td className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'>{'판매 중'}</td>
-                <td className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'>{'8,900'}</td>
-                <td className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'>{'Daily Life'}</td>
-                <td className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'>{'Daily Life'}</td>
-                <td className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'>{'2023.05.30'}</td>
-                <td className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'>{'2023.06.01'}</td>
-                <td className='px-[1.5rem] py-[1rem] border-[0.05rem] border-[#474E57]'>
-                  <button className='w-[4.2rem] h-[2.4rem] rounded bg-primary-newlloyd-button text-[#d9d9d9]'>수정</button>
-                </td>
-              </tr>}
+              }
             </tbody>
           </table>
         </div>

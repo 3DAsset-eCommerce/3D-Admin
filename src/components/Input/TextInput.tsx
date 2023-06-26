@@ -1,3 +1,4 @@
+
 "use client"
 import React, {useState,useRef} from 'react'
 
@@ -32,13 +33,16 @@ export default function TextInput({type='input' ,width, height=4.2, placeholder,
           <input style={{width: `${width}rem`, height:`${height}rem`}} className='py-[0.9rem] rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] text-[1.4rem] focus:border-neutral-navy-200' ref={inputRef} placeholder={inputValue ? inputValue : placeholder}  disabled={disabled} onChange={counter && countInputHandler}/>
           <div className='relative'>
             {counter && <p className='text-[1.4rem] font-light absolute -bottom-[3rem] left-[53.5rem]'><span className='text-primary-newlloyd-button '>{inputLength}</span><span>  / {counter}</span></p>}
+
           </div>
-        </form>)
-        :
-        (
-        <textarea style={{width: `${width}rem`, height:`${height}rem`}} className='p-[0.9rem] rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] text-[1.4rem]' placeholder={placeholder}></textarea>
-        )
-    }
+        </form>
+      ) : (
+        <textarea
+          style={{ width: `${width}rem`, height: `${height}rem` }}
+          className="p-[0.9rem] rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] text-[1.4rem]"
+          placeholder={placeholder}
+        ></textarea>
+      )}
     </>
   )
 }

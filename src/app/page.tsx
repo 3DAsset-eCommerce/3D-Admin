@@ -1,4 +1,3 @@
-import Header from '@/components/Header'
 import Body from '@/components/Body'
 import TableContainer from '@/components/Table/TableContainer'
 import TableItem from '@/components/Table/TableItem'
@@ -34,9 +33,8 @@ const categoryList = [
 ];
 
 
+
 export default function Home() {
-  
-  
   return (
   <>
     <div className='w-full'>
@@ -68,13 +66,48 @@ export default function Home() {
               <TextInput width={26.5} placeholder='판매가에서'/>
               <div className='w-[3.5rem] h-[4.2rem] rounded flex justify-center items-center border border-neutral-navy-200 bg-neutral-navy-950 px-[1.1rem] text-[1.4rem]'>%</div>
               <p className='ml-[1.5rem] flex items-center'>할인</p>
+
             </div>
-            <Divider/>
-            <div>
-              <div className='pt-[3rem] flex'>
-                <p>최종판매가</p>
-                <p className='ml-[10rem]'><span>{}</span> 원<span className='ml-[1.5rem]'>({}원 할인)</span></p>
+          </TableItem>
+          <TableItem title="에셋 설명" required={true}>
+            <TextInput
+              type="textarea"
+              width={58.4}
+              height={23.7}
+              placeholder="에셋의 특징을 적어주세요."
+            />
+          </TableItem>
+          <TableItem title="태그 설정" required={false}>
+            <TextInput width={38.8} placeholder="태그를 입력해주세요. (최대 10개)" />
+            <TagsContainer />
+          </TableItem>
+          <Divider />
+          <TableItem title="썸네일 이미지" required={true}>
+            <ImageUploader width={21.4} height={26.6} />
+            <p className="pt-[2rem]">
+              전체 에셋 리스트 페이지에서 보여지는 대표 썸네일 이미지입니다.
+              <br />
+              권장크기: 214 x 266
+              <br />
+              jpg, jpeg, gif, png, bmp 형식의 이미지 (최대 10MB)만 등록 가능합니다.
+            </p>
+          </TableItem>
+          <TableItem title="상세 페이지 이미지" required={true}>
+            <div className="flex flex-col gap-[2.6rem]">
+              <div className="imageContainer flex gap-[2.6rem]">
+                <ImageUploader width={21.4} height={15.8} />
+                <ImageUploader width={21.4} height={15.8} />
+                <ImageUploader width={21.4} height={15.8} />
+                <ImageUploader width={21.4} height={15.8} />
+                <ImageUploader width={21.4} height={15.8} />
               </div>
+              <p>
+                상세 페이지 최상단에 보여지는 이미지입니다. 최대 5장까지 등록 가능합니다.
+                <br />
+                권장 크기: 710 x 520
+                <br />
+                jpg, jpeg, gif, png, bmp 형식의 이미지 (최대 10MB)만 등록 가능합니다.
+              </p>
             </div>
           </div>
         </TableItem>
@@ -109,4 +142,5 @@ export default function Home() {
       </div>
     </Body>
   </>)
+
 }
