@@ -1,15 +1,16 @@
-import React from 'react'
+"use client"
+import React, {useState} from 'react'
 import Header from '@/components/Header'
 import Body from '@/components/Body'
-import TableContainer from '@/components/TableContainer'
-import TableItem from '@/components/TableItem'
+import TableContainer from '@/components/Table/TableContainer'
+import TableItem from '@/components/Table/TableItem'
 import FileUploader from '@/components/Input/FileUploader'
-import Select from '@/components/Input/Select'
 import TextInput from '@/components/Input/TextInput'
 import Divider from '@/components/Divider'
 import ImageUploader from '@/components/Input/ImageUploader'
 import Button from '@/components/Button'
-import TagsContainer from '@/components/tag/TagsContainer'
+import TagsContainer from '@/components/Tag/TagsContainer'
+import SelectContainer from '@/components/Select/SelectContainer'
 
 export default function AssetIdPage() {
   const data =  {
@@ -30,7 +31,32 @@ export default function AssetIdPage() {
         "tag3"
     ]
 }
-  
+const categoryList = [
+  {
+    "id": 1,
+    "categoryName": "cute"
+  },
+  {
+    "id": 2,
+    "categoryName": "pretty"
+  },
+  {
+    "id": 3,
+    "categoryName": "sexy"
+  },
+  {
+    "id": 4,
+    "categoryName": "luxury"
+  },
+  {
+    "id": 5,
+    "categoryName":"cool"
+  },
+];
+
+
+  const [selectedCategory, setSelectedCategory] = useState(categoryList[0])  
+
 
   return  (
   <>
@@ -45,12 +71,11 @@ export default function AssetIdPage() {
           </FileUploader>
         </TableItem>
         <TableItem title='카테고리' required={true}>
-          <Select>
-            <p className='text-mm absolute'>{'선택한 카테고리: 대분류 > 중분류'}</p>
-          </Select>
+          <SelectContainer categoryList={categoryList} setSelectedCategory={setSelectedCategory}/>
+          <p className='text-mm absolute mt-[0.8rem]'>선택한 카테고리:{highCategory} &gt; {selectedCategory.subCategory ? selectedCategory.subCategory : '' }</p>
         </TableItem>
         <TableItem title='에셋명' required={true}>
-          <TextInput width={58.4}  placeholder='에셋의 특징을 잘 드러내는 이름을 적어주세요.' required={true} counter={100} inputValue={data.assetName}/>
+          <TextInput width={58.4}  placeholder='에셋의 특징을 잘 드러내는 이름을 적어주세요.' counter={100} inputValue={data.assetName}/>
         </TableItem>
         <TableItem title='판매가격' required={true}>
           <div className='w-[19.6rem] flex'>
@@ -69,7 +94,7 @@ export default function AssetIdPage() {
             <div>
               <div className='pt-[3rem] flex'>
                 <p>최종판매가</p>
-                <p className='ml-[10rem]'><span>{}</span> 원<span className='ml-[1.5rem]'>({}원 할인)</span></p>
+                <p className='ml-[10rem]'><span>{'-'}</span> 원<span className='ml-[1.5rem]'>({'-'}원 할인)</span></p>
               </div>
             </div>
           </div>
@@ -83,17 +108,17 @@ export default function AssetIdPage() {
         </TableItem>
         <Divider/>
         <TableItem title='썸네일 이미지' required={true}>
-          <ImageUploader width={21.4} height={26.6}/>
+          <ImageUploader width={21.4} height={26.6} id={7}/>
           <p className='pt-[2rem]'>전체 에셋 리스트 페이지에서 보여지는 대표 썸네일 이미지입니다.<br/>권장크기: 214 x 266<br/>jpg, jpeg, gif, png, bmp 형식의 이미지 (최대 10MB)만 등록 가능합니다.</p>
       </TableItem>
       <TableItem title='상세 페이지 이미지' required={true}>
         <div className='flex flex-col gap-[2.6rem]'>
           <div className='imageContainer flex gap-[2.6rem]'>
-            <ImageUploader width={21.4} height={15.8}/>
-            <ImageUploader width={21.4} height={15.8}/>
-            <ImageUploader width={21.4} height={15.8}/>
-            <ImageUploader width={21.4} height={15.8}/>
-            <ImageUploader width={21.4} height={15.8}/>
+            <ImageUploader width={21.4} height={15.8} id={8}/>
+            <ImageUploader width={21.4} height={15.8} id={9}/>
+            <ImageUploader width={21.4} height={15.8} id={10}/>
+            <ImageUploader width={21.4} height={15.8} id={11}/>
+            <ImageUploader width={21.4} height={15.8} id={12}/>
           </div>
           <p>상세 페이지 최상단에 보여지는 이미지입니다. 최대 5장까지 등록 가능합니다.<br/>권장 크기: 710 x 520<br/>jpg, jpeg, gif, png, bmp 형식의 이미지 (최대 10MB)만 등록 가능합니다.</p>
         </div>
