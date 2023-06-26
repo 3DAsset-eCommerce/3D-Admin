@@ -54,7 +54,7 @@ export default function AssetsPage() {
             <div></div>
           </TableItem>
           <TableItem title='카테고리' required={false}>
-            {/* <SelectContainer categoryList={categoryList} /> */}
+            <SelectContainer categoryList={categoryList} />
           </TableItem>
           <TableItem title='판매상태' required={false}>
             <RadioGroup label='saleState'>

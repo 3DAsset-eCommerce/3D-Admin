@@ -72,7 +72,7 @@ const categoryList = [
         </TableItem>
         <TableItem title='카테고리' required={true}>
           <SelectContainer categoryList={categoryList} setSelectedCategory={setSelectedCategory}/>
-          <p className='text-mm absolute mt-[0.8rem]'>선택한 카테고리:{highCategory} &gt; {selectedCategory.subCategory ? selectedCategory.subCategory : '' }</p>
+          {/* <p className='text-mm absolute mt-[0.8rem]'>선택한 카테고리:{highCategory} &gt; {selectedCategory.subCategory ? selectedCategory.subCategory : '' }</p> */}
         </TableItem>
         <TableItem title='에셋명' required={true}>
           <TextInput width={58.4}  placeholder='에셋의 특징을 잘 드러내는 이름을 적어주세요.' counter={100} inputValue={data.assetName}/>
