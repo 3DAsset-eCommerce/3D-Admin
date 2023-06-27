@@ -1,4 +1,6 @@
 module.exports = {
+  tailwindConfig: './styles/tailwind.config.js',
+
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -28,7 +30,7 @@ module.exports = {
       xl: '3.2rem',
     },
     borderRadius: {
-      DEFAULT: '0.4rem'
+      DEFAULT: '0.4rem',
     },
     extend: {
       colors: {
@@ -68,8 +70,8 @@ module.exports = {
         transparent: {
           gray: '#EBECF0',
           navy: '#FAFBFC',
-          'navy-15': 'rgba(250, 251, 252, 0.15)',
-          'navy-30': 'rgba(159, 173, 188, 0.3)',
+          'navy-15': '#FAFBFC26',
+          'navy-30': '#9FADB34D',
           'navy-second': '#9FADBC',
           blue: '#60AFFF',
           darkblue: '#237FDB',

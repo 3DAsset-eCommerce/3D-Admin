@@ -1,4 +1,4 @@
-import Header from '@/components/Header'
+import Header from '@/components/Header/Index'
 import Body from '@/components/Body'
 import TableContainer from '@/components/Table/TableContainer'
 import TableItem from '@/components/Table/TableItem'
@@ -34,10 +34,11 @@ const categoryList = [
 ];
 
 
+
+
 export default function Home() {
-  
-  
   return (
+
   <>
     <div className='w-full'>
       <Header title='에셋 등록' required={true} isButton={true}/>
@@ -69,14 +70,27 @@ export default function Home() {
               <div className='w-[3.5rem] h-[4.2rem] rounded flex justify-center items-center border border-neutral-navy-200 bg-neutral-navy-950 px-[1.1rem] text-[1.4rem]'>%</div>
               <p className='ml-[1.5rem] flex items-center'>할인</p>
             </div>
-            <Divider/>
+          </div>
+        </TableItem>
+        <TableItem title="할인" required={false}>
+          <div className="flex flex-col">
+            <div className="w-[50rem] flex">
+              <TextInput width={26.5} placeholder="판매가에서" />
+              <div className="w-[3.5rem] h-[4.2rem] rounded flex justify-center items-center border border-neutral-navy-200 bg-neutral-navy-950 px-[1.1rem] text-[1.4rem]">
+                %
+              </div>
+              <p className="ml-[1.5rem] flex items-center">할인</p>
+            </div>
+            <Divider />
             <div>
-              <div className='pt-[3rem] flex'>
+              <div className="pt-[3rem] flex">
                 <p>최종판매가</p>
-                <p className='ml-[10rem]'><span>{}</span> 원<span className='ml-[1.5rem]'>({}원 할인)</span></p>
+                <p className="ml-[10rem]">
+                  <span>{}</span> 원<span className="ml-[1.5rem]">({}원 할인)</span>
+                </p>
               </div>
             </div>
-          </div>
+          </div> 
         </TableItem>
         <TableItem title='에셋 설명' required={true}>
           <TextInput type='textarea' width={58.4} height={23.7} placeholder='에셋의 특징을 적어주세요.' />
