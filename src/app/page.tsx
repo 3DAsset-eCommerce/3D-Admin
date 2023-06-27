@@ -66,8 +66,8 @@ export default function Home() {
         <TableItem title='할인' required={false}>
           <div className='flex flex-col'>
             <div className='w-[50rem] flex'>
-              <TextInput width={26.5} placeholder='판매가에서'/>
-              <div className='w-[3.5rem] h-[4.2rem] rounded flex justify-center items-center border border-neutral-navy-200 bg-neutral-navy-950 px-[1.1rem] text-[1.4rem]'>%</div>
+              <TextInput width={26.5} placeholder='판매가에서' disabled={true}/>
+              <div className='w-[3.5rem] h-[4.2rem] rounded flex justify-center items-center border border-neutral-navy-200 bg-neutral-navy-950 px-[1.1rem] ml-[0.5rem] text-[1.4rem]'>%</div>
               <p className='ml-[1.5rem] flex items-center'>할인</p>
             </div>
           </div>
@@ -96,7 +96,7 @@ export default function Home() {
           <TextInput type='textarea' width={58.4} height={23.7} placeholder='에셋의 특징을 적어주세요.' />
         </TableItem>
         <TableItem title='태그 설정' required={false}>
-          <TextInput width={38.8} placeholder='태그를 입력해주세요. (최대 10개)'/>
+          <TextInput doesEnterWork={true} width={38.8} placeholder='태그를 입력해주세요. (최대 10개)'/>
           <TagsContainer/>
         </TableItem>
         <Divider/>
