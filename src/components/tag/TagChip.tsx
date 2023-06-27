@@ -7,7 +7,7 @@ interface TagChipProps {
 }
 
 export default function TagChip({children,arr, setArr}:TagChipProps) {
-  const tagRef = useRef(null)
+  const tagRef = useRef<HTMLSpanElement | null>(null)
   const deleteTagHandler = () => {
     const newArr = arr.filter((item)=>item !== tagRef.current.innerHTML) 
     setArr(newArr)  
