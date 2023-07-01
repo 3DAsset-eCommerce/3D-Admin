@@ -7,10 +7,10 @@ interface TextInputProps {
   height?: number
   placeholder: string
   inputValue?: string
-  counter?: boolean
+  counter?: number
   disabled?: boolean
-  tagsArr: string[]
-  setTagsArr: Function
+  tagsArr?: string[]
+  setTagsArr?: Function
 }
 
 export default function TextInput({
@@ -29,12 +29,13 @@ export default function TextInput({
   const setTagsArr = props.setTagsArr
 
   const handlerKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    typeof tagsArr === 'array' &&
+    (if (e.key === 'Enter') {
       setTagsArr([...tagsArr, e.target.value])
       e.target.value = ''
     } else {
       setInputLength(e.target.value.length)
-    }
+    })
   }
 
   return (

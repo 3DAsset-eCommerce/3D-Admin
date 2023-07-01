@@ -1,4 +1,3 @@
-
 import Header from '@/components/Header/Index'
 import Body from '@/components/Body'
 import TableContainer from '@/components/Table/TableContainer'
