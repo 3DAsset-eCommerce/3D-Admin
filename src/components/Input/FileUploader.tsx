@@ -7,14 +7,14 @@ interface FileUploaderProps {
   inputHeight?: number,
   placeholder?: string,
   inputValue?:string, //file url
-  assetdata?: object,
-  setAssetdata?: Function,
+
+  
   children?: ReactNode,
 }
 
 export default function FileUploader({children,inputWidth, inputHeight=12, inputValue,...props}:FileUploaderProps) {
-  const assetdata = props.assetdata;
-  const setAssetdata = props.setAssetdata;
+
+ 
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [value, setValue] = useState(inputValue?inputValue:'선택된 파일 없음')
   const uploadFileHandler = (e: ChangeEvent) => {

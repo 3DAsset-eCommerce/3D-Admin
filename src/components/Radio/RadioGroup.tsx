@@ -2,7 +2,7 @@
 import React, { ReactNode, createContext} from "react";
 import { useRadioGroup } from "react-aria";
 import { useRadioGroupState } from "react-stately";
-import { RadioGroupProps as radiogroupprops} from "react-stately";
+import { RadioGroupProps} from "react-stately";
 
 
 export const RadioContext = createContext(null);
