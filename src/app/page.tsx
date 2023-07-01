@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux'
 
 import Header from '@/components/Header/Index'
 import Body from '@/components/Body'
@@ -13,8 +12,7 @@ import Button from '@/components/Button'
 import TagsContainer from '@/components/Tag/TagsContainer'
 
 export default function Home() {
-  const dispatch = useDispatch()
-  console.log(dispatch)
+
 
   return (
     <>
@@ -32,10 +30,6 @@ export default function Home() {
           </TableItem>
           <TableItem title="카테고리" required={true}>
             <SelectContainer />
-            <p className="absolute mt-[0.8rem] text-mm">
-              선택한 카테고리:{} {'>'}
-              {}
-            </p>
           </TableItem>
           <TableItem title="에셋명" required={true}>
             <TextInput
@@ -79,11 +73,6 @@ export default function Home() {
             />
           </TableItem>
           <TableItem title="태그 설정" required={false}>
-            <TextInput
-              doesEnterWork={true}
-              width={38.8}
-              placeholder="태그를 입력해주세요. (최대 10개)"
-            />
             <TagsContainer />
           </TableItem>
           <Divider />
