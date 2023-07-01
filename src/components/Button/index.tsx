@@ -9,11 +9,12 @@ interface ButtonProps {
   borderRadius?:number,
   borderColor?: string,
   color?: string,
-  id?:string
+  id?:string,
+  onClick?:Function,
   children: ReactNode
 }
 
-export default function Button({children, width=13, height= 3.6, backgroundColor='#237FDB',borderRadius=0.4, borderColor='transparent', color='#FFF', id}:ButtonProps) {
+export default function Button({children, width=13, height= 3.6, backgroundColor='#237FDB',borderRadius=0.4, borderColor='transparent', color='#FFF', id, onClick}:ButtonProps) {
   const [isClicked, setIsClicked] = useState(false)
   const clickHandler = () => {
     setIsClicked(!isClicked)

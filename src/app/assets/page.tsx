@@ -11,35 +11,13 @@ import Button from '@/components/Button'
 import Divider from '@/components/Divider'
 import RadioGroup from '@/components/Radio/RadioGroup'
 import SelectContainer from '@/components/Select/SelectContainer'
+import { SSRProvider } from 'react-aria'
 
-
-const categoryList = [
-  {
-    "id": 1,
-    "categoryName": "cute"
-  },
-  {
-    "id": 2,
-    "categoryName": "pretty"
-  },
-  {
-    "id": 3,
-    "categoryName": "sexy"
-  },
-  {
-    "id": 4,
-    "categoryName": "luxury"
-  },
-  {
-    "id": 5,
-    "categoryName":"cool"
-  },
-];
 
 export default function AssetsPage() {
 
   return (
-    <>
+    <SSRProvider>
       <Header title="에셋 조회/수정" required={false} isButton={false} />
       <Body>
         <TableContainer>
@@ -65,7 +43,7 @@ export default function AssetsPage() {
             <div></div>
           </TableItem>
           <TableItem title='카테고리' required={false}>
-            <SelectContainer categoryList={categoryList} />
+            <SelectContainer categoryList={categoryList}  />
           </TableItem>
           <TableItem title='판매상태' required={false}>
             <RadioGroup label='saleState'>
@@ -108,6 +86,6 @@ export default function AssetsPage() {
           </table>
         </div>
       </Body>
-    </>
+    </SSRProvider>
   )
 }

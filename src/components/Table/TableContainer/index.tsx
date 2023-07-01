@@ -6,18 +6,7 @@ interface TableContainerProps {
 }
 
 export default function TableContainer({children}:TableContainerProps) {
-  const [assetdata, setAssetdata] = useState({
-    assetId: 1,
-    assetName: "",
-    price: "",
-    fileSize: 0,
-    fileUrl: "",
-    creator: "",
-    assetDetail:"",
-    tagList: [],
-    thumbnail:"",
-    detailImages:[]
-  })
+
 
   return (
     <ul className='flex flex-col gap-[5rem]'>
@@ -25,8 +14,8 @@ export default function TableContainer({children}:TableContainerProps) {
         Children.map(children,(child,index)=> {
           return cloneElement(child,{
             key: index,
-            assetdata: assetdata,
-            setAssetdata: setAssetdata
+           
+           
           })
         })
       }
