@@ -1,5 +1,5 @@
-"use client"
-import React, {useState} from 'react'
+'use client'
+import React, { useState } from 'react'
 import Header from '@/components/Header'
 import Body from '@/components/Body'
 import TableContainer from '@/components/Table/TableContainer'
@@ -28,9 +28,6 @@ export default function AssetIdPage() {
     tagList: ['tag1', 'tag2', 'tag3'],
   }
 
-
-  const [selectedCategory, setSelectedCategory] = useState(categoryList[0])
-
   return (
     <>
       <div className="w-full">
@@ -46,11 +43,7 @@ export default function AssetIdPage() {
             </FileUploader>
           </TableItem>
           <TableItem title="카테고리" required={true}>
-            <SelectContainer
-              categoryList={categoryList}
-              setSelectedCategory={setSelectedCategory}
-            />
-            {/* <p className='text-mm absolute mt-[0.8rem]'>선택한 카테고리:{highCategory} &gt; {selectedCategory.subCategory ? selectedCategory.subCategory : '' }</p> */}
+            <SelectContainer />
           </TableItem>
           <TableItem title="에셋명" required={true}>
             <TextInput
@@ -95,7 +88,6 @@ export default function AssetIdPage() {
             />
           </TableItem>
           <TableItem title="태그 설정" required={false}>
-            <TextInput width={38.8} placeholder="태그를 입력해주세요. (최대 10개)" />
             <TagsContainer tagList={data.tagList} />
           </TableItem>
           <Divider />
