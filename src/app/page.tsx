@@ -85,7 +85,7 @@ export default function Home() {
               jpg, jpeg, gif, png, bmp 형식의 이미지 (최대 10MB)만 등록 가능합니다.
             </p>
           </TableItem>
-          <TableItem title="상세 페이지 이미지" required={true}>
+          <TableItem title="상세 페이지 이미지" required={false}>
             <div className="flex flex-col gap-[2.6rem]">
               <div className="imageContainer flex gap-[2.6rem]">
                 <ImageUploader width={21.4} height={15.8} id={2} />
