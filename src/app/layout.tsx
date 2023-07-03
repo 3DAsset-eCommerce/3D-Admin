@@ -1,6 +1,9 @@
-import SideNav from '@/components/SideNav'
 import '@/styles/globals.css'
+import SideNav from '@/components/SideNav'
 import { Inter } from 'next/font/google'
+import ReactQueryProvider from '@/reactQuery/Provider'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReduxProviders } from '@/store/Provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,12 +16,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko" className={inter.className}>
       <body>
-        <div className="flex">
-          <SideNav />
-          <main className="ml-[25rem] h-[290.6rem] px-[7.2rem] text-neutral-navy-100 ">
-            {children}
-          </main>
-        </div>
+        <ReactQueryProvider>
+          <ReduxProviders>
+                {children}
+            <ReactQueryDevtools />
+          </ReduxProviders>
+        </ReactQueryProvider>
       </body>
     </html>
   )
