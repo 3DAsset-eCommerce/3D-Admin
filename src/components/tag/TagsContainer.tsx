@@ -8,7 +8,7 @@ interface TagsContainerProps {
 }
 
 export default function TagsContainer({ tagList = [] }: TagsContainerProps) {
-  const [tagsArr, setTagsArr] = useState(tagList)
+  const [tagsArr, setTagsArr] = useState<string[]>(tagList)
   return (
     <>
       <TextInput

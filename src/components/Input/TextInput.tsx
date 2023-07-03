@@ -1,5 +1,6 @@
 'use client'
-import React, { useState, useRef, KeyboardEvent } from 'react'
+import React, { useState, useRef, KeyboardEvent, Dispatch, SetStateAction } from 'react'
+import {createAssetName, createAssetDescription, createAssetPrice, createAssetDiscount, createTagList} from '@/store/assetSlice'
 
 interface TextInputProps {
   type?: 'input' | 'textarea'
@@ -10,7 +11,7 @@ interface TextInputProps {
   counter?: number
   disabled?: boolean
   tagsArr?: string[]
-  setTagsArr?: Function
+  setTagsArr?: Dispatch<SetStateAction<string[]>>
 }
 
 export default function TextInput({
@@ -29,15 +30,24 @@ export default function TextInput({
   const setTagsArr = props.setTagsArr
 
   const handlerKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    typeof tagsArr === 'array' &&
-    (if (e.key === 'Enter') {
-      setTagsArr([...tagsArr, e.target.value])
-      e.target.value = ''
+    if (tagsArr !== undefined && setTagsArr !== undefined && e.key === 'Enter') {
+      if (tagsArr.length >= 10) {
+        alert('최대 10개까지 가능합니다.')
+      } else {
+        if (tagsArr.find((item) => item === e.currentTarget.value)) {
+          console.log('tagsArr:', tagsArr)
+          alert('이미 존재하는 태그입니다.')
+          return
+        } else {
+          console.log([...tagsArr, e.currentTarget.value])
+          setTagsArr([...tagsArr, e.currentTarget.value])
+          e.currentTarget.value = ''
+        }
+      }
     } else {
-      setInputLength(e.target.value.length)
-    })
+      setInputLength(e.currentTarget.value.length)
+    }
   }
-
   return (
     <>
       {type === 'input' ? (
