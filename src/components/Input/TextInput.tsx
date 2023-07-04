@@ -1,9 +1,17 @@
 'use client'
-import React, { useState, useRef, KeyboardEvent, Dispatch, SetStateAction } from 'react'
-import {createAssetName, createAssetDescription, createAssetPrice, createAssetDiscount, createTagList} from '@/store/assetSlice'
+import React, { useState, useRef, KeyboardEvent, Dispatch, SetStateAction, FormEvent } from 'react'
+import { useForm } from 'react-hook-form'
+import {
+  createAssetName,
+  createAssetDescription,
+  createAssetPrice,
+  createAssetDiscount,
+  createTagList,
+} from '@/store/assetSlice'
 
 interface TextInputProps {
-  type?: 'input' | 'textarea'
+  type?: 'input' | 'textarea' | 'number'
+  required: boolean
   width: number
   height?: number
   placeholder: string
@@ -16,6 +24,7 @@ interface TextInputProps {
 
 export default function TextInput({
   type = 'input',
+  required,
   width,
   height = 4.2,
   placeholder,
@@ -24,43 +33,60 @@ export default function TextInput({
   disabled = false,
   ...props
 }: TextInputProps) {
-  const inputRef = useRef<HTMLInputElement | null>(null)
+  const {
+    formState: {},
+  } = useForm({
+    delayError: 1000,
+    mode: 'onChange',
+    defaultValues: { inputValue },
+  })
+  const inputRef = useRef<HTMLInputElement>()
   const [inputLength, setInputLength] = useState<number | undefined>(inputValue?.length)
   const tagsArr = props.tagsArr
   const setTagsArr = props.setTagsArr
 
   const handlerKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (tagsArr !== undefined && setTagsArr !== undefined && e.key === 'Enter') {
+    if (counter && e.key !== 'Enter') {
+      setInputLength(e.currentTarget.value.length)
+      console.log(e.nativeEvent)
+    }
+  }
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault()
+    if (tagsArr !== undefined && setTagsArr !== undefined && inputRef.current !== undefined) {
       if (tagsArr.length >= 10) {
         alert('최대 10개까지 가능합니다.')
+        return
       } else {
-        if (tagsArr.find((item) => item === e.currentTarget.value)) {
+        if (tagsArr.find((item) => item === inputRef.current?.value)) {
           console.log('tagsArr:', tagsArr)
           alert('이미 존재하는 태그입니다.')
           return
         } else {
-          console.log([...tagsArr, e.currentTarget.value])
-          setTagsArr([...tagsArr, e.currentTarget.value])
-          e.currentTarget.value = ''
+          console.log([...tagsArr, inputRef.current?.value])
+          setTagsArr([...tagsArr, inputRef.current?.value])
+          inputRef.current.value = ''
+          return
         }
       }
-    } else {
-      setInputLength(e.currentTarget.value.length)
     }
   }
   return (
     <>
-      {type === 'input' ? (
-        <div>
+      {type === 'input' || type === 'number' ? (
+        <form onSubmit={submitHandler}>
           <input
+            ref={inputRef}
             style={{ width: `${width}rem`, height: `${height}rem` }}
             className={
               'rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] py-[0.9rem] text-[1.4rem] focus:border-neutral-navy-200 disabled:bg-neutral-navy-850'
             }
-            ref={inputRef}
-            placeholder={inputValue ? inputValue : placeholder}
+            placeholder={placeholder}
             disabled={disabled}
             onKeyDown={handlerKeyDown}
+            defaultValue={inputValue}
+            maxLength={100}
+            required={required}
           />
           <div className="relative">
             {counter && (
@@ -70,12 +96,13 @@ export default function TextInput({
               </p>
             )}
           </div>
-        </div>
+        </form>
       ) : (
         <textarea
           style={{ width: `${width}rem`, height: `${height}rem` }}
           className="rounded border border-[#474E57] bg-neutral-navy-950 p-[0.9rem] px-[2rem] text-[1.4rem]"
           placeholder={placeholder}
+          defaultValue={inputValue}
         ></textarea>
       )}
     </>
