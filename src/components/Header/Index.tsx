@@ -19,8 +19,10 @@ export default function Header({
     <div className="box-content h-[3.1rem] pt-[8rem]">
       <div className="flex justify-between">
         <h1>
-          <span className="font-[700] text-[2.6rem] leading-[3.1rem]">{title}</span>
-          {required && <span className="text-primary-newlloyd-button ml-[2.6rem]">• 필수항목</span>}
+          <span className="text-[2.6rem] font-[700] leading-[3.1rem] text-neutral-navy-100">
+            {title}
+          </span>
+          {required && <span className="ml-[2.6rem] text-primary-newlloyd-button">• 필수항목</span>}
         </h1>
         {isButton && <Button>{buttonText}</Button>}
       </div>

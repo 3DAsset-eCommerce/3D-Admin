@@ -79,7 +79,7 @@ export default function TextInput({
             ref={inputRef}
             style={{ width: `${width}rem`, height: `${height}rem` }}
             className={
-              'rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] py-[0.9rem] text-[1.4rem] focus:border-neutral-navy-200 disabled:bg-neutral-navy-850'
+              'rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] py-[0.9rem] text-[1.4rem]  text-neutral-navy-200 focus:border-neutral-navy-200 disabled:bg-neutral-navy-850'
             }
             placeholder={placeholder}
             disabled={disabled}
@@ -92,7 +92,7 @@ export default function TextInput({
             {counter && (
               <p className="absolute -bottom-[3rem] left-[53.5rem] text-[1.4rem] font-light">
                 <span className="text-primary-newlloyd-button ">{inputLength}</span>
-                <span> / {counter}</span>
+                <span className=" text-neutral-navy-200"> / {counter}</span>
               </p>
             )}
           </div>
@@ -100,7 +100,7 @@ export default function TextInput({
       ) : (
         <textarea
           style={{ width: `${width}rem`, height: `${height}rem` }}
-          className="rounded border border-[#474E57] bg-neutral-navy-950 p-[0.9rem] px-[2rem] text-[1.4rem]"
+          className="rounded border border-[#474E57] bg-neutral-navy-950 p-[0.9rem] px-[2rem] text-[1.4rem]  text-neutral-navy-200"
           placeholder={placeholder}
           defaultValue={inputValue}
         ></textarea>

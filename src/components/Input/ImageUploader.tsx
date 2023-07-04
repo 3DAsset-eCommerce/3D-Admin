@@ -37,7 +37,7 @@ export default function ImageUploader({ required, width, height, id }: ImageUplo
             className={
               isUploaded
                 ? 'hidden px-[1rem] text-[6.4rem] hover:cursor-pointer'
-                : 'px-[1rem] text-[6.4rem] hover:cursor-pointer'
+                : 'px-[1rem] text-[6.4rem]  text-neutral-navy-200 hover:cursor-pointer'
             }
           >
             +

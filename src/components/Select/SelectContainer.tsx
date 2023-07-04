@@ -7,7 +7,6 @@ type Category = {
   id: number
   categoryName: string
   subCategory?: Category[]
-
 }
 
 interface SelectContainerProps {
@@ -23,7 +22,7 @@ export default function SelectContainer() {
 
   const handleOptionClick = (e) => {
     console.log(e.target.textContent)
-  if(e.target.id = 'mainCategory'){
+    if ((e.target.id = 'mainCategory')) {
       setSelectedOption((prev) => ({
         ...prev,
         ['main']: e.target.textContent,
@@ -57,7 +56,7 @@ export default function SelectContainer() {
         >
           <Listbox.Button
             id="mainCategory"
-            className="flex min-h-[4.2rem] min-w-[24rem] justify-between rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] py-[0.9rem] text-[1.4rem] focus:border-neutral-navy-200"
+            className="flex min-h-[4.2rem] min-w-[24rem] justify-between rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] py-[0.9rem] text-[1.4rem]  text-neutral-navy-200 focus:border-neutral-navy-200"
           >
             <span>{selectedOption.main}</span>
             <DropDownIcon />
@@ -67,7 +66,7 @@ export default function SelectContainer() {
               <Listbox.Option
                 key={item.id}
                 value={item}
-                className="flex min-h-[3.5rem] min-w-[24rem] items-center border border-[rgba(0,0,0,0)] px-[2rem] py-[0.9rem] hover:border-neutral-navy-200"
+                className="flex min-h-[3.5rem] min-w-[24rem] items-center border border-[rgba(0,0,0,0)] px-[2rem] py-[0.9rem] text-neutral-navy-200 hover:border-neutral-navy-200"
                 onClick={handleOptionClick}
               >
                 {item.categoryName}
@@ -88,8 +87,8 @@ export default function SelectContainer() {
             id="subCategory"
             className={
               disabled
-                ? 'flex min-h-[4.2rem] min-w-[24rem] justify-between rounded border border-[#474E57] bg-neutral-navy-850 px-[2rem] py-[0.9rem] text-[1.4rem] focus:border-neutral-navy-200'
-                : 'flex min-h-[4.2rem] min-w-[24rem] justify-between rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] py-[0.9rem] text-[1.4rem] focus:border-neutral-navy-200'
+                ? 'flex min-h-[4.2rem] min-w-[24rem] justify-between rounded border border-[#474E57] bg-neutral-navy-850 px-[2rem] py-[0.9rem] text-[1.4rem] text-neutral-navy-200 focus:border-neutral-navy-200'
+                : 'flex min-h-[4.2rem] min-w-[24rem] justify-between rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] py-[0.9rem] text-[1.4rem] text-neutral-navy-200 focus:border-neutral-navy-200'
             }
           >
             <span>{selectedOption.sub}</span>
@@ -111,7 +110,7 @@ export default function SelectContainer() {
           )}
         </Listbox>
       </div>
-      <p className="absolute mt-[0.8rem] text-mm">
+      <p className="absolute mt-[0.8rem] text-mm text-neutral-navy-200">
         선택한 카테고리: {selectedOption.main} {' > '}
         {selectedOption.sub}
       </p>

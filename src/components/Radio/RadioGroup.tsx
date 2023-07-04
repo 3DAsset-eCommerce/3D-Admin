@@ -1,21 +1,22 @@
-"use client"
-import React, { ReactNode, createContext} from "react";
-import { useRadioGroup } from "react-aria";
-import { useRadioGroupState } from "react-stately";
-import { RadioGroupProps} from "react-stately";
+'use client'
+import React, { ReactNode, createContext } from 'react'
+import { useRadioGroup } from 'react-aria'
+import { useRadioGroupState } from 'react-stately'
+import { RadioGroupProps } from 'react-stately'
 
+export const RadioContext = createContext(null)
 
-export const RadioContext = createContext(null);
-
-export default function RadioGroup(props: RadioGroupProps){
+export default function RadioGroup(props: RadioGroupProps) {
   const { children, label } = props
-  let state = useRadioGroupState(props);
-  let { radioGroupProps, labelProps } = useRadioGroup(props, state);
+  let state = useRadioGroupState(props)
+  let { radioGroupProps, labelProps } = useRadioGroup(props, state)
   // console.log('radioGroupProps',radioGroupProps )
   // console.log('labelProps',labelProps)
   return (
-      <RadioContext.Provider value={state}>
-        <div className="flex gap-[2.5rem] items-center pt-[1.2rem]" aria-label={label}>{children}</div>
-      </RadioContext.Provider>
-  );
+    <RadioContext.Provider value={state}>
+      <div className="flex items-center gap-[2.5rem] pt-[1.2rem]" aria-label={label}>
+        {children}
+      </div>
+    </RadioContext.Provider>
+  )
 }

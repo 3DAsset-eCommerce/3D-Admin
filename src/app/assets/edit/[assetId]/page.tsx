@@ -9,6 +9,7 @@ import ImageUploader from '@/components/Input/ImageUploader'
 import Button from '@/components/Button'
 import TagsContainer from '@/components/Tag/TagsContainer'
 import SelectContainer from '@/components/Select/SelectContainer'
+import Layout from '@/components/Common/Layout'
 
 export default function AssetIdPage() {
   const data = {
@@ -27,7 +28,7 @@ export default function AssetIdPage() {
   }
 
   return (
-    <>
+    <Layout>
       <div className="w-full">
         <Header title="에셋 수정" required={true} isButton={true} />
       </div>
@@ -134,6 +135,6 @@ export default function AssetIdPage() {
           </Button>
         </div>
       </Body>
-    </>
+    </Layout>
   )
 }

@@ -1,6 +1,4 @@
-
-import LoginPage from './login/page'
-
+import LoginPage from "@/components/Page/LoginPage"
 
 export default function Home() {
 
@@ -9,7 +7,7 @@ export default function Home() {
     <>
       {/* <AssetEnrollPage/> */}
       <LoginPage />
-
     </>
   )
 }
+
