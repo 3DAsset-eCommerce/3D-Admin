@@ -4,14 +4,16 @@ import TextInput from '../Input/TextInput'
 import TagChip from './TagChip'
 
 interface TagsContainerProps {
+  required:boolean
   tagList?: string[]
 }
 
-export default function TagsContainer({ tagList = [] }: TagsContainerProps) {
+export default function TagsContainer({ required , tagList = [] }: TagsContainerProps) {
   const [tagsArr, setTagsArr] = useState<string[]>(tagList)
   return (
     <>
       <TextInput
+      required={required}
         width={38.8}
         placeholder="태그를 입력해주세요. (최대 10개)"
         tagsArr={tagsArr}

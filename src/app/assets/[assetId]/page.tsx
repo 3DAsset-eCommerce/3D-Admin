@@ -1,6 +1,4 @@
-'use client'
-import React, { useState } from 'react'
-import Header from '@/components/Header'
+import Header from '@/components/Header/Index'
 import Body from '@/components/Body'
 import TableContainer from '@/components/Table/TableContainer'
 import TableItem from '@/components/Table/TableItem'
@@ -47,6 +45,7 @@ export default function AssetIdPage() {
           </TableItem>
           <TableItem title="에셋명" required={true}>
             <TextInput
+              required={true}
               width={58.4}
               placeholder="에셋의 특징을 잘 드러내는 이름을 적어주세요."
               counter={100}
@@ -55,14 +54,19 @@ export default function AssetIdPage() {
           </TableItem>
           <TableItem title="판매가격" required={true}>
             <div className="flex w-[19.6rem]">
-              <TextInput width={24} placeholder="숫자만 입력" inputValue={data.price} />
+              <TextInput
+                required={true}
+                width={24}
+                placeholder="숫자만 입력"
+                inputValue={data.price}
+              />
               <p className="ml-[1.5rem] flex items-center">원</p>
             </div>
           </TableItem>
           <TableItem title="할인" required={false}>
             <div className="flex flex-col">
               <div className="flex w-[50rem]">
-                <TextInput width={26.5} placeholder="판매가에서" disabled={true} />
+                <TextInput required={false} width={26.5} placeholder="판매가에서" disabled={true} />
                 <div className="flex h-[4.2rem] w-[3.5rem] items-center justify-center rounded border border-neutral-navy-200 bg-neutral-navy-950 px-[1.1rem] text-[1.4rem]">
                   %
                 </div>
@@ -82,17 +86,18 @@ export default function AssetIdPage() {
           <TableItem title="에셋 설명" required={true}>
             <TextInput
               type="textarea"
+              required={true}
               width={58.4}
               height={23.7}
               placeholder="에셋의 특징을 적어주세요."
             />
           </TableItem>
           <TableItem title="태그 설정" required={false}>
-            <TagsContainer tagList={data.tagList} />
+            <TagsContainer required={false} tagList={data.tagList} />
           </TableItem>
           <Divider />
           <TableItem title="썸네일 이미지" required={true}>
-            <ImageUploader width={21.4} height={26.6} id={7} />
+            <ImageUploader required={true} width={21.4} height={26.6} id={7} />
             <p className="pt-[2rem]">
               전체 에셋 리스트 페이지에서 보여지는 대표 썸네일 이미지입니다.
               <br />
@@ -101,14 +106,14 @@ export default function AssetIdPage() {
               jpg, jpeg, gif, png, bmp 형식의 이미지 (최대 10MB)만 등록 가능합니다.
             </p>
           </TableItem>
-          <TableItem title="상세 페이지 이미지" required={true}>
+          <TableItem title="상세 페이지 이미지" required={false}>
             <div className="flex flex-col gap-[2.6rem]">
               <div className="imageContainer flex gap-[2.6rem]">
-                <ImageUploader width={21.4} height={15.8} id={8} />
-                <ImageUploader width={21.4} height={15.8} id={9} />
-                <ImageUploader width={21.4} height={15.8} id={10} />
-                <ImageUploader width={21.4} height={15.8} id={11} />
-                <ImageUploader width={21.4} height={15.8} id={12} />
+                <ImageUploader required={false} width={21.4} height={15.8} id={8} />
+                <ImageUploader required={false} width={21.4} height={15.8} id={9} />
+                <ImageUploader required={false} width={21.4} height={15.8} id={10} />
+                <ImageUploader required={false} width={21.4} height={15.8} id={11} />
+                <ImageUploader required={false} width={21.4} height={15.8} id={12} />
               </div>
               <p>
                 상세 페이지 최상단에 보여지는 이미지입니다. 최대 5장까지 등록 가능합니다.
