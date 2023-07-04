@@ -1,6 +1,6 @@
 import { getToken } from '@/utils/token'
-// import axios, { AxiosRequestConfig, AxiosError } from './axios'
-import axios from 'axios'
+import axios, { AxiosRequestConfig, AxiosError } from 'axios'
+
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {
@@ -9,15 +9,18 @@ export const axiosInstance = axios.create({
   },
 })
 
-// axiosInstance.interceptors.request.use(
-//   (request) => {
-//     const accessToken = getToken()
 
-//     if (accessToken) request.headers['Authorization'] = `Bearer ${accessToken}`
-//     return request
-//   },
-//   (error: AxiosError) => {
-//     console.log(error)
-//     return Promise.reject(error)
-//   },
-// )
+
+axiosInstance.interceptors.request.use(
+  (request) => {
+    const accessToken = getToken()
+
+    if (accessToken) request.headers['Authorization'] = `Bearer ${accessToken}`
+    return request
+  },
+  (error: AxiosError) => {
+    console.log(error)
+    return Promise.reject(error)
+  },
+)
+

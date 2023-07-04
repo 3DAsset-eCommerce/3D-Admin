@@ -12,6 +12,9 @@ import Divider from '@/components/Divider'
 import RadioGroup from '@/components/Radio/RadioGroup'
 import SelectContainer from '@/components/Select/SelectContainer'
 
+import Layout from '@/components/Common/Layout'
+import Assets from '@/components/Assets'
+
 
 export default function AssetsPage() {
 
@@ -44,7 +47,6 @@ export default function AssetsPage() {
           <TableItem title="카테고리" required={false}>
             <SelectContainer />
           </TableItem>
-         
             <TableItem title="판매상태" required={false}>
               <RadioGroup label="saleState">
                 <Radio value="전체">전체</Radio>
@@ -52,7 +54,6 @@ export default function AssetsPage() {
                 <Radio value="판매중지">판매중지</Radio>
               </RadioGroup>
             </TableItem>
-         
         </TableContainer>
         <div className="buttonContainer mt-[5rem] flex justify-center gap-[1.6rem]">
           <Button width={12.5} height={3.6}>
@@ -97,6 +98,11 @@ export default function AssetsPage() {
           </table>
         </div>
       </Body>
+{/* 
+      <Layout>
+        <Assets />
+      </Layout> */}
+
     </>
   )
 }
