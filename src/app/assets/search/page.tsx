@@ -59,15 +59,16 @@ export default function AssetsPage() {
             초기화
           </Button>
         </div>
+        <Divider />
       </Body>
-      <Divider />
+
       <Body>
         <div>
           <span>
             에셋 목록 (총 <span className="text-primary-main">{10}</span>개)
           </span>
         </div>
-        <AssetsTableContainer/>
+        <AssetsTableContainer />
       </Body>
     </Layout>
   )

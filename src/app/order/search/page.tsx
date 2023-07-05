@@ -13,6 +13,11 @@ import Button from '@/components/Button'
 import OrderTableContainer from '@/components/OrderTableContainer'
 
 export default function SalesManagementPage() {
+  //주문 번호 ?onum=20230704000004
+  // 상품명 &name=cuteboy
+  // 상품번호 $anum=
+  // 이메일 $email=sdfkj@naver.com
+
   return (
     <Layout>
       <Header title="주문통합검색" required={false} isButton={false} />

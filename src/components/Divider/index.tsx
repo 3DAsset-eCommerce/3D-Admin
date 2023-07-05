@@ -5,7 +5,7 @@ interface DividerProps {
   height?: number
 }
 
-export default function Divider({ width = '100%', height = 0.1 }: DividerProps) {
+export default function Divider({ width = '100%', height = 0.2 }: DividerProps) {
   return (
     <div
       style={{ width: `${width}`, height: `${height}rem` }}
