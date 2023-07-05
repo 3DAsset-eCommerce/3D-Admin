@@ -44,7 +44,7 @@ export default function FileUploader({
       <input
         disabled
         style={{ width: `${inputWidth}rem`, height: `${inputHeight}rem` }}
-        className="rounded border border-[#474E57] bg-neutral-navy-950 px-[1.1rem] text-[1.4rem] text-neutral-navy-200"
+        className="rounded border border-[#474E57] bg-neutral-navy-950 px-[1.1rem] text-[1.4rem]"
         value={value}
       />
       <input type="file" id="uploadBtn" className="hidden" onChange={uploadFileHandler} />

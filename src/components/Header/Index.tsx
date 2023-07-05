@@ -16,7 +16,7 @@ export default function Header({
   buttonText = '에셋 등록',
 }: HeaderProps) {
   return (
-    <div className="box-content h-[3.1rem] pt-[8rem]">
+    <div className="absolute box-border h-[13.5rem] w-full px-[9rem] pt-[8rem]">
       <div className="flex justify-between">
         <h1>
           <span className="text-[2.6rem] font-[700] leading-[3.1rem] text-neutral-navy-100">
@@ -26,7 +26,7 @@ export default function Header({
         </h1>
         {isButton && <Button>{buttonText}</Button>}
       </div>
-      <Divider height="0.2rem" />
+      <Divider height={0.2} />
     </div>
   )
 }
