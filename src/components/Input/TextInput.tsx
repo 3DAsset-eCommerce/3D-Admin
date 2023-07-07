@@ -69,7 +69,7 @@ export default function TextInput({
               console.log('descriptionRedux')
               break
           }
-        }, 2000)()
+        }, 5000)()
       } else if (label === 'tag') {
         return
       }
@@ -92,7 +92,7 @@ export default function TextInput({
             setTagsArr([...tagsArr, inputRef.current?.value])
             debounce(() => {
               dispatch(createTagList([inputRef.current?.value, ...tagsArr]))
-            }, 2000)()
+            }, 5000)()
             console.log('tagsDispatch')
           }
         }

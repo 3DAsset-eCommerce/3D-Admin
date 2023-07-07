@@ -8,7 +8,7 @@ import Divider from '@/components/Divider'
 import ImageUploader from '@/components/Input/ImageUploader'
 import Button from '@/components/Button'
 import TagsContainer from '@/components/Tag/TagsContainer'
-import SelectContainer from '@/components/Select/SelectContainer'
+import AssetCategorySelectContainer from '@/components/Select/AssetCategorySelectContainer'
 import Layout from '@/components/Layout'
 
 export default function AssetIdPage() {
@@ -40,10 +40,11 @@ export default function AssetIdPage() {
             </FileUploader>
           </TableItem>
           <TableItem title="카테고리" required={true}>
-            <SelectContainer />
+            <AssetCategorySelectContainer />
           </TableItem>
           <TableItem title="에셋명" required={true}>
             <TextInput
+              label="name"
               required={true}
               width={58.4}
               placeholder="에셋의 특징을 잘 드러내는 이름을 적어주세요."
@@ -54,6 +55,7 @@ export default function AssetIdPage() {
           <TableItem title="판매가격" required={true}>
             <div className="flex w-[19.6rem]">
               <TextInput
+                label="price"
                 required={true}
                 width={24}
                 placeholder="숫자만 입력"
@@ -65,7 +67,13 @@ export default function AssetIdPage() {
           <TableItem title="할인" required={false}>
             <div className="flex flex-col">
               <div className="flex w-[50rem]">
-                <TextInput required={false} width={26.5} placeholder="판매가에서" disabled={true} />
+                <TextInput
+                  label="price"
+                  required={false}
+                  width={26.5}
+                  placeholder="판매가에서"
+                  disabled={true}
+                />
                 <div className="flex h-[4.2rem] w-[3.5rem] items-center justify-center rounded border border-neutral-navy-200 bg-neutral-navy-950 px-[1.1rem] text-[1.4rem]">
                   %
                 </div>
@@ -85,6 +93,7 @@ export default function AssetIdPage() {
           <TableItem title="에셋 설명" required={true}>
             <TextInput
               type="textarea"
+              label="description"
               required={true}
               width={58.4}
               height={23.7}
@@ -96,7 +105,7 @@ export default function AssetIdPage() {
           </TableItem>
           <Divider />
           <TableItem title="썸네일 이미지" required={true}>
-            <ImageUploader required={true} width={21.4} height={26.6} id={7} />
+            <ImageUploader type="thumbnail" required={true} width={21.4} height={26.6} id={7} />
             <p className="pt-[2rem]">
               전체 에셋 리스트 페이지에서 보여지는 대표 썸네일 이미지입니다.
               <br />
@@ -108,11 +117,11 @@ export default function AssetIdPage() {
           <TableItem title="상세 페이지 이미지" required={false}>
             <div className="flex flex-col gap-[2.6rem]">
               <div className="imageContainer flex gap-[2.6rem]">
-                <ImageUploader required={false} width={21.4} height={15.8} id={8} />
-                <ImageUploader required={false} width={21.4} height={15.8} id={9} />
-                <ImageUploader required={false} width={21.4} height={15.8} id={10} />
-                <ImageUploader required={false} width={21.4} height={15.8} id={11} />
-                <ImageUploader required={false} width={21.4} height={15.8} id={12} />
+                <ImageUploader type="detail" required={false} width={21.4} height={15.8} id={8} />
+                <ImageUploader type="detail" required={false} width={21.4} height={15.8} id={9} />
+                <ImageUploader type="detail" required={false} width={21.4} height={15.8} id={10} />
+                <ImageUploader type="detail" required={false} width={21.4} height={15.8} id={11} />
+                <ImageUploader type="detail" required={false} width={21.4} height={15.8} id={12} />
               </div>
               <p>
                 상세 페이지 최상단에 보여지는 이미지입니다. 최대 5장까지 등록 가능합니다.
@@ -125,10 +134,17 @@ export default function AssetIdPage() {
           </TableItem>
         </TableContainer>
         <div className="buttonContainer mt-[5rem] flex justify-center gap-[1.6rem]">
-          <Button width={18.1} height={5.2} backgroundColor="transparent" borderColor="#60AFFF">
+          <Button
+            type="fail"
+            label="edit"
+            width={18.1}
+            height={5.2}
+            backgroundColor="transparent"
+            borderColor="#60AFFF"
+          >
             취소
           </Button>
-          <Button width={18.1} height={5.2}>
+          <Button type="success" label="edit" width={18.1} height={5.2}>
             에셋 등록
           </Button>
         </div>

@@ -11,7 +11,7 @@ import ListBox from '@/components/Select/ListBox'
 import TextInput from '@/components/Input/TextInput'
 import Button from '@/components/Button'
 import OrderTableContainer from '@/components/OrderTableContainer'
-
+import OrderCategorySelectContainer from '@/components/Select/OrderCategorySelectContainer'
 export default function SalesManagementPage() {
   //주문 번호 ?onum=20230704000004
   // 상품명 &name=cuteboy
@@ -32,14 +32,21 @@ export default function SalesManagementPage() {
             <DateInput />
           </TableItem>
           <TableItem title="상세조건" required={false}>
-            <ListBox title="주문번호" array={['주문번호', '상품명', '상품번호', '구매자 이메일']} />
+            <OrderCategorySelectContainer />
             <TextInput required={false} width={24} placeholder="" />
           </TableItem>
           <div className="buttonContainer mt-[5rem] flex justify-center gap-[1.6rem] text-[1.4rem]">
-            <Button width={12.5} height={3.6}>
+            <Button type="success" label="search" width={12.5} height={3.6}>
               검색
             </Button>
-            <Button width={12.5} height={3.6} backgroundColor="transparent" borderColor="#60AFFF">
+            <Button
+              type="fail"
+              label="search"
+              width={12.5}
+              height={3.6}
+              backgroundColor="transparent"
+              borderColor="#60AFFF"
+            >
               초기화
             </Button>
           </div>

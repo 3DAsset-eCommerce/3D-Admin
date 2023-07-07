@@ -39,7 +39,7 @@ export default function FileUploader({
         debounce(() => {
           console.log('debounce')
           dispatch(createFileUrl(fileAsset))
-        }, 2000)()
+        }, 5000)()
       }
     } else {
       alert('파일이 존재하지 않습니다.')

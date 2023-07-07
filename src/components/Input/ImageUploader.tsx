@@ -43,7 +43,7 @@ export default function ImageUploader({ type, required, width, height, id }: Ima
           //2초 동안 아무 동작 없으면 그제서야 dispatch 하기
           debounce(() => {
             dispatch(createThumbnailSrc(url))
-          }, 2000)()
+          }, 5000)()
           console.log('thumbnailRedux')
         } else if (type === 'detail') {
           // debounce(() => {

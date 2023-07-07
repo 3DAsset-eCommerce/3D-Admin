@@ -10,10 +10,7 @@
     "commit": "git-cz"
   },
   "dependencies": {
-<<<<<<<<< Temporary merge branch 1
-    "@react-aria/listbox": "^3.9.1",
-    "@react-aria/select": "^3.10.1",
-    "@react-stately/select": "^3.5.1",
+    "@headlessui/react": "^1.7.15",
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.29.19",
     "@tanstack/react-query-devtools": "^4.29.19",
@@ -32,7 +29,6 @@
     "react": "18.2.0",
     "react-aria": "^3.25.0",
     "react-dom": "18.2.0",
-<<<<<<<<< Temporary merge branch 1
     "react-hook-form": "^7.45.1",
     "react-redux": "^8.1.1",
     "sweetalert2": "^11.7.12",

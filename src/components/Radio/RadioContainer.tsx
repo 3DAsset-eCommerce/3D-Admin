@@ -9,14 +9,14 @@ interface RadioGroupProps {
 }
 
 export default function RadioContainer({ type, label, array }: RadioGroupProps) {
-  const [isFocused, setIsFocused] = useState([])
+  const [isFocused, setIsFocused] = useState({ 전체: true, 판매중: false, 판매중지: false })
   return (
     <RadioGroup className={type === 'circle' ? 'flex gap-[2.4rem]' : 'flex'}>
       {type === 'circle'
         ? array.map((item) => (
             <RadioGroup.Option key={item} value={item}>
               <div className="flex gap-[0.8rem] text-neutral-navy-200">
-                <RadioInactive />
+                {/* {isFocused.{item} ?<RadioActive/>:<RadioInactive />} */}
                 {item}
               </div>
             </RadioGroup.Option>
