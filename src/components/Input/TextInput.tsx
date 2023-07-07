@@ -98,6 +98,7 @@ export default function TextInput({
           } else {
             // console.log([...tagsArr, inputRef.current?.value])
             setTagsArr([...tagsArr, inputRef.current?.value])
+            inputRef.current.value = ''
             debounce(() => {
               dispatch(createTagList([inputRef.current?.value, ...tagsArr]))
             }, 5000)()
