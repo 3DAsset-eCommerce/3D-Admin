@@ -1,4 +1,15 @@
-import { ApiResponse} from './'
+import { ApiResponse } from './'
+
+export interface AssetsSearchRequest {
+  page?: number
+  size?: number
+  sort?: 'createdAt' | 'desc'
+  num?: number
+  name?: string
+  category?: string
+  subcategory?: string
+  status?: boolean
+}
 
 export interface AssetDetail {
   assetId: number
