@@ -1,8 +1,11 @@
 'use client'
 import React, { ReactNode, useState, ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
-import { createFileUrl, createFileExtension, createFileSize } from '@/store/assetSlice'
+import { UseSelector } from 'react-redux/es/hooks/useSelector'
 import Button from '../Button'
+import { createFileUrl, createFileExtension, createFileSize } from '@/store/assetSlice'
+import { uploadFileAsset } from '@/api/service/asset'
+import { debounce } from '@/utils/debounce'
 
 interface FileUploaderProps {
   inputWidth: number
@@ -22,18 +25,22 @@ export default function FileUploader({
 }: FileUploaderProps) {
   const [value, setValue] = useState(inputValue ? inputValue : '선택된 파일 없음')
   const dispatch = useDispatch()
-  const createFileInfo = (file: File) => {
-    const fileSize = Number((file.size / 1024).toFixed(2))
-    dispatch(createFileUrl(file))
-    // dispatch(createFileExtension())
-    // dispatch(createFileSize(fileSize))
-  }
+
   const uploadFileHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
+    setValue('')
     if (e.currentTarget.files !== null) {
-      console.log('file:', e.currentTarget.files[0])
-      setValue(e.currentTarget.files[0].name)
-      // setTimeout(createFileInfo(e.currentTarget.files[0]), 5000)
+      const fileAsset = e.currentTarget.files[0]
+      const fileSize = Number((fileAsset.size / 1024 ** 2).toFixed(2))
+      if (fileSize > 10) {
+        alert('최대 10MB까지 업로드 가능합니다.')
+      } else {
+        setValue(fileAsset.name)
+        debounce(() => {
+          console.log('debounce')
+          dispatch(createFileUrl(fileAsset))
+        }, 2000)()
+      }
     } else {
       alert('파일이 존재하지 않습니다.')
     }
