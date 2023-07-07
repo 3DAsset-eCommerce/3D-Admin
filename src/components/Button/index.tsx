@@ -1,12 +1,13 @@
 'use client'
 
-import React, { MouseEventHandler, ReactNode, useState } from 'react'
+import React, { MouseEventHandler, ReactNode } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { uploadAsset, editAsset, uploadFileAsset } from '@/api/service/asset'
+
 interface ButtonProps {
   children: ReactNode
-  type?: 'fail' | 'success' | 'none'
+  type: 'fail' | 'success' | 'none'
   label?: 'enroll' | 'edit' | 'search' | 'none'
   width?: number
   height?: number
@@ -15,12 +16,12 @@ interface ButtonProps {
   borderColor?: string
   color?: string
   id?: string
-  onClick?: Function
+  onClick?: MouseEventHandler
 }
 
 export default function Button({
   children,
-  type = 'none',
+  type,
   label = 'none',
   width = 13,
   height = 3.6,
@@ -31,11 +32,9 @@ export default function Button({
   id,
   onClick,
 }: ButtonProps) {
-  const [isClicked, setIsClicked] = useState(false)
   const asset = useSelector((state: RootState) => state.createAsset)
 
-  const clickHandler: MouseEventHandler = () => {
-    setIsClicked(!isClicked)
+  const clickHandler = () => {
     switch (type) {
       case 'fail':
         break
@@ -79,11 +78,8 @@ export default function Button({
           color: `${color}`,
           borderRadius: `${borderRadius}rem`,
         }}
-        className={
-          ' flex items-center justify-center border py-[0.8rem] hover:cursor-pointer ' +
-          `${isClicked && 'border border-transparent-blue text-neutral-navy-100 '}`
-        }
-        onClick={type === 'none' ? undefined : clickHandler}
+        className=" flex items-center justify-center border py-[0.8rem] hover:cursor-pointer "
+        onClick={type === 'none' ? onClick : clickHandler}
       >
         {children}
       </span>

@@ -55,7 +55,7 @@ export default function FileUploader({
         value={value}
       />
       <input type="file" id="uploadBtn" className="hidden" onChange={uploadFileHandler} />
-      <Button id="uploadBtn" width={13} height={4.2}>
+      <Button id="uploadBtn" type="none" width={13} height={4.2}>
         파일 선택
       </Button>
       {children}
