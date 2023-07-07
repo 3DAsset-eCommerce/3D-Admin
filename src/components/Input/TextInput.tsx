@@ -51,7 +51,7 @@ export default function TextInput({
     mode: 'onChange',
     defaultValues: { inputValue },
   })
-  const inputRef = useRef<HTMLInputElement | null>()
+  const inputRef = useRef<HTMLInputElement>(null)
   const [inputLength, setInputLength] = useState<number | undefined>(inputValue?.length)
   const tagsArr = props.tagsArr
   const setTagsArr = props.setTagsArr
