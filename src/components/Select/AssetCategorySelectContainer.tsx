@@ -22,6 +22,7 @@ export default function AssetCategorySelectContainer() {
   useEffect(() => {
     getMainCategory()
     selectedMainOption && getSubCategory(selectedMainOption)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <>
