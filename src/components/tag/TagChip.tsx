@@ -11,7 +11,6 @@ export default function TagChip({ children, tagsArr, setTagsArr }: TagChipProps)
   const tagRef = useRef<HTMLSpanElement | null>(null)
   const deleteTagHandler = () => {
     const newArr = tagsArr.filter((item) => item !== tagRef.current?.innerText)
-    console.log(newArr)
     setTagsArr(newArr)
   }
   return (
