@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useRef, KeyboardEvent, Dispatch, SetStateAction, FormEvent } from 'react'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import {
   createAssetName,
   createAssetDescription,
@@ -8,9 +9,10 @@ import {
   createAssetDiscount,
   createTagList,
 } from '@/store/assetSlice'
-
+import { debounce } from '@/utils/debounce'
 interface TextInputProps {
   type?: 'input' | 'textarea' | 'number'
+  label?: 'name' | 'price' | 'description' | 'tag' | 'none'
   required: boolean
   width: number
   height?: number
@@ -24,6 +26,7 @@ interface TextInputProps {
 
 export default function TextInput({
   type = 'input',
+  label = 'none',
   required,
   width,
   height = 4.2,
@@ -40,41 +43,68 @@ export default function TextInput({
     mode: 'onChange',
     defaultValues: { inputValue },
   })
-  const inputRef = useRef<HTMLInputElement>()
+  const inputRef = useRef<HTMLInputElement | null>()
   const [inputLength, setInputLength] = useState<number | undefined>(inputValue?.length)
   const tagsArr = props.tagsArr
   const setTagsArr = props.setTagsArr
+  const dispatch = useDispatch()
 
-  const handlerKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (counter && e.key !== 'Enter') {
-      setInputLength(e.currentTarget.value.length)
-      console.log(e.nativeEvent)
+  const keyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    const inputValue = e.currentTarget.value
+    if (e.key !== 'Enter') {
+      counter && setInputLength(e.currentTarget.value.length)
+      if (label !== 'tag') {
+        debounce(() => {
+          switch (label) {
+            case 'name':
+              dispatch(createAssetName(inputValue))
+              console.log('nameRedux')
+              break
+            case 'price':
+              dispatch(createAssetPrice(parseFloat(inputValue)))
+              console.log('priceRedux')
+              break
+            case 'description':
+              dispatch(createAssetDescription(inputValue))
+              console.log('descriptionRedux')
+              break
+          }
+        }, 2000)()
+      } else if (label === 'tag') {
+        return
+      }
     }
   }
-  const submitHandler = (e: FormEvent) => {
+
+  const tagSubmitHandler = (e: FormEvent) => {
     e.preventDefault()
     if (tagsArr !== undefined && setTagsArr !== undefined && inputRef.current !== undefined) {
-      if (tagsArr.length >= 10) {
-        alert('최대 10개까지 가능합니다.')
-        return
-      } else {
-        if (tagsArr.find((item) => item === inputRef.current?.value)) {
-          console.log('tagsArr:', tagsArr)
-          alert('이미 존재하는 태그입니다.')
-          return
-        } else {
-          console.log([...tagsArr, inputRef.current?.value])
-          setTagsArr([...tagsArr, inputRef.current?.value])
+      if (inputRef.current.value) {
+        if (tagsArr.length >= 10) {
+          alert('최대 10개까지 가능합니다.')
           inputRef.current.value = ''
-          return
+        } else {
+          if (tagsArr.find((item) => item === inputRef.current?.value)) {
+            alert('이미 존재하는 태그입니다.')
+            inputRef.current.value = ''
+          } else {
+            // console.log([...tagsArr, inputRef.current?.value])
+            setTagsArr([...tagsArr, inputRef.current?.value])
+            debounce(() => {
+              dispatch(createTagList([inputRef.current?.value, ...tagsArr]))
+            }, 2000)()
+            console.log('tagsDispatch')
+          }
         }
+      } else {
+        alert('태그명을 입력해주세요.')
       }
     }
   }
   return (
     <>
       {type === 'input' || type === 'number' ? (
-        <form onSubmit={submitHandler}>
+        <form onSubmit={tagSubmitHandler}>
           <input
             ref={inputRef}
             style={{ width: `${width}rem`, height: `${height}rem` }}
@@ -83,7 +113,7 @@ export default function TextInput({
             }
             placeholder={placeholder}
             disabled={disabled}
-            onKeyDown={handlerKeyDown}
+            onKeyDown={keyDownHandler}
             defaultValue={inputValue}
             maxLength={100}
             required={required}
@@ -103,6 +133,7 @@ export default function TextInput({
           className="rounded border border-[#474E57] bg-neutral-navy-950 p-[0.9rem] px-[2rem] text-[1.4rem]  text-neutral-navy-200"
           placeholder={placeholder}
           defaultValue={inputValue}
+          onKeyDown={keyDownHandler}
         ></textarea>
       )}
     </>
