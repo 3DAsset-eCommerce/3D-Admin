@@ -1,6 +1,8 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import TableItem from '../Table/TableItem'
 import ListBox from '../Select/ListBox'
+import TableRow from './TableRow'
 
 const orderList = [
   {
@@ -46,55 +48,44 @@ const orderList = [
 ]
 
 export default function OrderTableContainer() {
+  const [selectedOption, setSelectedOption] = useState('주문일 최신순')
   return (
     <>
       <div className=" my-[3.7rem] flex justify-between">
         <div className="flex items-center text-[1.6rem] font-[600] text-neutral-navy-100">
           목록 (총 <span className="text-primary-newlloyd-button">{120}</span>건 )
         </div>
-        <ListBox title="주문일 최신순" array={['주문일 최신순', '주문일 오래된순']} />
+        <ListBox
+          array={['주문일 최신순', '주문일 오래된순']}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+        />
       </div>
       <div className="h-[64.6rem] w-full overflow-auto border border-[#474E57] px-[1.4rem] py-[1.6rem]">
         <table className="h-[63rem] w-full border border-[#474E57] text-[1.4rem]">
           <tbody w-full>
-            <tr className="grid w-full grid-cols-[1.5fr_0.8fr_2fr_2fr_1fr_1fr_1fr] grid-rows-[4.2rem] bg-[#171A1D]">
-              <th className="border-[0.05rem] border-[#474E57] px-[1.5rem] py-[1rem]">주문번호</th>
-              <th className="border-[0.05rem] border-[#474E57] px-[1.5rem] py-[1rem]">주문일</th>
-              <th className="border-[0.05rem] border-[#474E57] px-[1.5rem] py-[1rem]">상품명</th>
-              <th className="border-[0.05rem] border-[#474E57] px-[1.5rem] py-[1rem]">
-                구매자 이메일
-              </th>
-              <th className="border-[0.05rem] border-[#474E57] px-[1.5rem] py-[1rem]">결제금액</th>
-              <th className="border-[0.05rem] border-[#474E57] px-[1.5rem] py-[1rem]">결제수단</th>
-              <th className="border-[0.05rem] border-[#474E57] px-[1.5rem] py-[1rem]">결제상태</th>
-            </tr>
+            <TableRow
+              num="주문번호"
+              orderedDate="주문일"
+              name="상품명"
+              email="구매자 이메일"
+              price="결제금액"
+              payment="결제수단"
+              status="결제상태"
+              isHeader={true}
+            />
             {orderList.map((item) => (
-              <tr
+              <TableRow
                 key={item.orderNumber}
-                className="grid w-full grid-cols-[1.5fr_0.8fr_2fr_2fr_1fr_1fr_1fr] grid-rows-[4.2rem] bg-[#31373D]"
-              >
-                <th className="border-box flex items-center justify-center border-[0.05rem] border-[#474E57] px-[1.2rem] py-[1rem]">
-                  {item.orderNumber}
-                </th>
-                <th className="border-box flex items-center justify-center border-[0.05rem] border-[#474E57] px-[1.2rem] py-[1rem]">
-                  {item.orderDate}
-                </th>
-                <th className="border-box flex items-center justify-center border-[0.05rem] border-[#474E57] px-[1.2rem] py-[1rem]">
-                  {item.assetName}
-                </th>
-                <th className="border-box flex items-center justify-center border-[0.05rem] border-[#474E57] px-[1.2rem] py-[1rem]">
-                  {item.email}
-                </th>
-                <th className="border-box flex items-center justify-center border-[0.05rem] border-[#474E57] px-[1.2rem] py-[1rem]">
-                  {item.price}
-                </th>
-                <th className="border-box flex items-center justify-center border-[0.05rem] border-[#474E57] px-[1.2rem] py-[1rem]">
-                  {item.paymentTool}
-                </th>
-                <th className="border-box flex items-center justify-center border-[0.05rem] border-[#474E57] px-[1.2rem] py-[1rem]">
-                  {item.status?'결제 완료':'결제 미완료'}
-                </th>
-              </tr>
+                num={item.orderNumber}
+                orderedDate={item.orderDate}
+                name={item.assetName}
+                email={item.email}
+                price={item.price}
+                payment={item.paymentTool}
+                status={item.status ? '결제완료' : '결제대기'}
+                isHeader={false}
+              />
             ))}
           </tbody>
         </table>
