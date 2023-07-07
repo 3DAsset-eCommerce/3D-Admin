@@ -9,6 +9,17 @@ export const store = configureStore({
     createAsset: assetReducer, //
     user: userReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these action types
+        ignoredActions: ['asset/createFileUrl'],
+        // Ignore these field paths in all actions
+        ignoredActionPaths: ['payload.file'],
+        // Ignore these paths in the state
+        ignoredPaths: ['createAsset.fileUrl'],
+      },
+    }),
 })
 
 export type RootState = ReturnType<typeof store.getState>

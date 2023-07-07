@@ -1,32 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 type AssetState = {
-  assetName: string
-  assetDescription: string
+  assetName: string | null
+  assetDescription: string | null
   price: number
   discount: number
-  category: string
-  subCategory: string
+  category: string | null
+  subCategory: string 
   addTagList: string[]
   fileUrl: string
   fileSize: number
-  extension: string
-  thumbnailUrl: string
+  extension: string | null
+  thumbnailUrl: string | null
   previewUrlList: string[]
 }
 
 const initialState: AssetState = {
-  assetName: '',
-  assetDescription: '',
-  price: 0,
+  assetName: null,
+  assetDescription: null,
+  price: 0.0,
   discount: 0,
-  category: '',
+  category: null,
   subCategory: '',
   addTagList: [],
   fileUrl: '',
-  fileSize: 0,
-  extension: '',
-  thumbnailUrl: '',
+  fileSize: 0.0,
+  extension: '.zip',
+  thumbnailUrl: null,
   previewUrlList: [],
 }
 
