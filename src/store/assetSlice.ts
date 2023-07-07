@@ -6,7 +6,7 @@ type AssetState = {
   price: number
   discount: number
   category: string | null
-  subCategory: string 
+  subCategory: string  | null
   addTagList: string[]
   fileUrl: string
   fileSize: number
@@ -21,11 +21,11 @@ const initialState: AssetState = {
   price: 0.0,
   discount: 0,
   category: null,
-  subCategory: '',
+  subCategory: null,
   addTagList: [],
   fileUrl: '',
   fileSize: 0.0,
-  extension: '.zip',
+  extension: null,
   thumbnailUrl: null,
   previewUrlList: [],
 }
