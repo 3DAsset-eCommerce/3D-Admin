@@ -1,5 +1,13 @@
 'use client'
-import React, { useState, useRef, KeyboardEvent, Dispatch, SetStateAction, FormEvent } from 'react'
+import React, {
+  useState,
+  useRef,
+  KeyboardEvent,
+  Dispatch,
+  SetStateAction,
+  FormEvent,
+  KeyboardEventHandler,
+} from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import {
@@ -49,7 +57,7 @@ export default function TextInput({
   const setTagsArr = props.setTagsArr
   const dispatch = useDispatch()
 
-  const keyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+  const keyDownHandler: KeyboardEventHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value
     if (e.key !== 'Enter') {
       counter && setInputLength(e.currentTarget.value.length)
@@ -78,7 +86,7 @@ export default function TextInput({
 
   const tagSubmitHandler = (e: FormEvent) => {
     e.preventDefault()
-    if (tagsArr !== undefined && setTagsArr !== undefined && inputRef.current !== undefined) {
+    if (tagsArr && setTagsArr && inputRef.current) {
       if (inputRef.current.value) {
         if (tagsArr.length >= 10) {
           alert('최대 10개까지 가능합니다.')
