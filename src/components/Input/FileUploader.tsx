@@ -42,11 +42,10 @@ export default function FileUploader({
           console.log(fileAsset)
 
           formData.append('file', fileAsset)
-          console.log(formData.get('file'))
+
           // dispatch(createFileUrl(formData))
           // console.log(formData)
           // dispatch(createFileSize(fileSize))
-          console.log('formData', formData)
 
           uploadFileAsset(formData)
         }, 5000)()

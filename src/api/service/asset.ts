@@ -35,23 +35,18 @@ export const uploadAsset = async (asset: FormData) => {
   const res = await axiosInstance.post('/s/admin/asset', asset)
   return res.data
 }
-export const uploadFileAsset = async (file: FormData) => {
+export const uploadFileAsset = async (file: any) => {
   const token = getToken()
-  const res = await axios.post(
-    `/s/admin/file/fbx`,
-    {
-      file: file,
+  const res = await axios.post(`/s/admin/file/fbx`, file, {
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${token}`,
     },
-    {
-      baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-      headers: {
-        'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
-        Authorization: `Bearer ${token}`,
-      },
-      withCredentials: true,
-    },
-  )
+    withCredentials: true,
+  })
   console.log('enrolledFile:', file)
+  console.log(res)
   return res.data
 }
 // export const uploadFileAsset = async (file) => {
