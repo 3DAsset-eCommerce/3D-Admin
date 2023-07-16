@@ -36,18 +36,18 @@ export default function FileUploader({
         alert('최대 10MB까지 업로드 가능합니다.')
       } else {
         setValue(fileAsset.name)
-        debounce(() => {
+        const formData = new FormData()
+        formData.append('file', fileAsset)
+        debounce(async () => {
           console.log('debounce')
-          const formData = new FormData()
-          console.log(fileAsset)
 
-          formData.append('file', fileAsset)
-
-          // dispatch(createFileUrl(formData))
           // console.log(formData)
           // dispatch(createFileSize(fileSize))
-
-          uploadFileAsset(formData)
+          const res = await uploadFileAsset(formData, 'fbx')
+          const url = res.data.data.keyName
+          console.log('returnedURL', url)
+          console.log(dispatch)
+          dispatch(createFileUrl(url))
         }, 5000)()
       }
     } else {

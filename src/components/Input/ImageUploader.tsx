@@ -3,7 +3,7 @@ import React, { useState, useRef, ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import { createThumbnailSrc, createPreviewUrlList } from '@/store/assetSlice'
 import { debounce } from '@/utils/debounce'
-import { uploadThumbnailAsset, uploadDetailPhotosAsset } from '@/api/service/asset'
+import { uploadFileAsset } from '@/api/service/asset'
 interface ImageUploaderProps {
   type: 'thumbnail' | 'detail'
   required: boolean
@@ -19,7 +19,6 @@ export default function ImageUploader({ type, required, width, height, id }: Ima
   const [imageName, setImageName] = useState<string>('')
   const [imageSize, setImageSize] = useState<number>(0)
   const dispatch = useDispatch()
-  let urlList
   const imageUploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
     //이미지 파일이 존재할 때,
     if (e.currentTarget.files !== null) {
@@ -44,15 +43,19 @@ export default function ImageUploader({ type, required, width, height, id }: Ima
           formData.append('file', image)
           console.log(formData)
           //2초 동안 아무 동작 없으면 그제서야 api 요청 보내기
-          debounce(() => {
-            const res = uploadThumbnailAsset(formData)
-            console.log('thumbnailUploadUrl:', res)
+          debounce(async () => {
+            const res = await uploadFileAsset(formData, 'thumbnail')
+            const url = res.data.data.keyName
+            console.log('thumbnailRedux')
+            dispatch(createThumbnailSrc(url))
           }, 5000)()
-          console.log('thumbnailRedux')
         } else if (type === 'detail') {
-          // debounce(() => {
-          //   dispatch(createPreviewUrlList(urlList))
-          // }, 2000)()
+          debounce(async () => {
+            const res = await uploadFileAsset(formData, 'detail')
+            console.log(res.data.data.keyName)
+
+            // dispatch(createPreviewUrlList(urlList))
+          }, 5000)()
           // console.log('detailImageSrcRedux')
         }
       }

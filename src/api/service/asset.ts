@@ -21,7 +21,7 @@ import { getToken } from '@/utils/token'
 // }
 export const getAllAssets = async () => {
   const res = await axiosInstance.get(
-    'https://neuroid-asset.shop/s/admin/assets?num=&name=man&category=&subcategory=&status=true&page=0&size=100&sort=createdAt',
+    '/s/admin/assets?num=&name=man&category=&subcategory=&status=true&page=0&size=100&sort=createdAt',
   )
   return res.data
 }
@@ -35,9 +35,9 @@ export const uploadAsset = async (asset: FormData) => {
   const res = await axiosInstance.post('/s/admin/asset', asset)
   return res.data
 }
-export const uploadFileAsset = async (file: any) => {
+export const uploadFileAsset = async (file: FormData, type: 'fbx' | 'thumbnail' | 'detail') => {
   const token = getToken()
-  const res = await axios.post(`/s/admin/file/fbx`, file, {
+  const res = await axios.post(`/s/admin/file/${type}`, file, {
     baseURL: process.env.NEXT_PUBLIC_BASE_URL,
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -45,67 +45,7 @@ export const uploadFileAsset = async (file: any) => {
     },
     withCredentials: true,
   })
-  console.log('enrolledFile:', file)
-  console.log(res)
-  return res.data
-}
-// export const uploadFileAsset = async (file) => {
-//   const token = getToken()
-//   try {
-//     const response = await fetch('https://neuroid-asset.shop/s/admin/file/fbx', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'multipart/form-data',
-//         Authorization: `Bearer ${token}`,
-//       },
-//       body: JSON.stringify({ file: file }),
-//     })
-
-//     if (response.ok) {
-//       const responseData = await response.json()
-//       console.log('Response:', responseData)
-//     } else {
-//       throw new Error('Request failed with status ' + response.status)
-//     }
-//   } catch (error) {
-//     console.error('Error:', error.message)
-//   }
-// }
-export const uploadThumbnailAsset = async (file: FormData) => {
-  const token = getToken()
-  const res = await axios.post(
-    `/s/admin/file/thumbnail`,
-    {
-      file: file,
-    },
-    {
-      baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-      headers: {
-        'Content-Type': 'multipart/form-data; boundary=[boundary]',
-        Authorization: `Bearer ${token}`,
-      },
-      withCredentials: true,
-    },
-  )
-  return res.data
-}
-export const uploadDetailPhotosAsset = async (file: FormData) => {
-  const token = getToken()
-  const res = await axios.post(
-    `/s/admin/file/detail`,
-    {
-      file: file,
-    },
-    {
-      baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-      headers: {
-        'Content-Type': 'multipart/form-data; boundary=[boundary]',
-        Authorization: `Bearer ${token}`,
-      },
-      withCredentials: true,
-    },
-  )
-  return res.data
+  return res
 }
 
 // export const editAsset = async (asset): Promise<T> => {
