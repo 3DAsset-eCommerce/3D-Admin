@@ -6,12 +6,12 @@ type AssetState = {
   price: number
   discount: number
   category: string | null
-  subCategory: string  | null
+  subCategory: string | null
   addTagList: string[]
-  fileUrl: string
+  fileUrl: FormData | null
   fileSize: number
   extension: string | null
-  thumbnailUrl: string | null
+  thumbnailUrl: FormData | null
   previewUrlList: string[]
 }
 
@@ -23,9 +23,9 @@ const initialState: AssetState = {
   category: null,
   subCategory: null,
   addTagList: [],
-  fileUrl: '',
+  fileUrl: null,
   fileSize: 0.0,
-  extension: null,
+  extension: '.fbx',
   thumbnailUrl: null,
   previewUrlList: [],
 }

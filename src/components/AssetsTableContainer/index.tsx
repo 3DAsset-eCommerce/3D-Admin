@@ -1,29 +1,34 @@
-
-import React from 'react'
+'use client'
+import React, { useState, useEffect } from 'react'
 import TableRow from './TableRow'
-const assetList = [
-  {
-    assetNumber: '20230601-000001',
-    assetName: 'cute  man',
-    status: 'active',
-    price: 1000.0,
-    categoryName: 'cute',
-    subCategoryName: 'man',
-    releaseDate: '2023-06-01',
-    updatedAt: '2023-07-04',
-  },
-  {
-    assetNumber: '20230601-000001',
-    assetName: 'cute  man',
-    status: 'active',
-    price: 1000.0,
-    categoryName: 'cute',
-    subCategoryName: 'man',
-    releaseDate: '2023-06-01',
-    updatedAt: '2023-07-04',
-  },
-]
+import { getAllAssets } from '@/api/service/asset'
+
+interface Asset {
+  assetId: string
+  assetName: string
+  price: number //소수점
+  discount: number
+  discountPrice: number //소수점
+  releaseDate: string
+  thumbnailUrl: string
+  rating: number //소수점
+  reviewCount: number
+  wishCount: number
+  wishlistId: null
+}
 export default function AssetsTableContainer() {
+  const [assets, setAssets] = useState<Asset[]>([])
+  const getFullAssetsArr = async () => {
+    const res = await getAllAssets()
+    const assetList = res.data.assetList
+    console.log(assetList)
+    setAssets(assetList)
+    return setAssets([])
+  }
+  useEffect(() => {
+    getFullAssetsArr()
+  }, [])
+
   return (
     <>
       <div className="y-[64.6rem] w-full overflow-auto border border-[#474E57] px-[1.4rem] py-[1.6rem]">
@@ -40,10 +45,10 @@ export default function AssetsTableContainer() {
               updatedAt="최종수정일"
               isHeader={true}
             />
-            {assetList.map((asset) => (
+            {assets.map((asset) => (
               <TableRow
-                key={asset.assetNumber}
-                num={asset.assetNumber}
+                key={asset.assetId + 'key'}
+                num={asset.assetId}
                 name={asset.assetName}
                 status={asset.status}
                 price={asset.price}

@@ -12,8 +12,9 @@ import Divider from '@/components/Divider'
 import AssetCategorySelectContainer from '@/components/Select/AssetCategorySelectContainer'
 import RadioContainer from '@/components/Radio/RadioContainer'
 import AssetsTableContainer from '@/components/AssetsTableContainer'
-import { searchAssets } from '@/api/service/asset'
-export default function AssetsPage() {
+
+export default function AssetsSearchPage() {
+  
   return (
     <Layout>
       <Header title="에셋 조회/수정" required={false} isButton={false} />
@@ -64,7 +65,6 @@ export default function AssetsPage() {
         </div>
         <Divider />
       </Body>
-
       <Body>
         <div>
           <span>

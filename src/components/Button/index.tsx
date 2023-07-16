@@ -3,7 +3,8 @@
 import React, { MouseEventHandler, ReactNode } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
-import { uploadAsset, editAsset, uploadFileAsset } from '@/api/service/asset'
+import { uploadAsset, editAsset, uploadFileAsset, uploadDetailPhotosAsset, uploadThumbnailAsset } from '@/api/service/asset'
+import { AssetUploadRequest } from '@/api/interface/asset'
 
 interface ButtonProps {
   children: ReactNode
@@ -32,11 +33,12 @@ export default function Button({
   id,
   onClick,
 }: ButtonProps) {
-  const asset = useSelector((state: RootState) => state.createAsset)
+  const asset = useSelector((state) => state.createAsset)
 
   const clickHandler = () => {
     switch (type) {
       case 'fail':
+        window.location.reload()
         break
       case 'success':
         switch (label) {
@@ -45,12 +47,11 @@ export default function Button({
               asset.assetName &&
               asset.assetDescription &&
               asset.price &&
-              // asset.category &&
+              asset.category &&
               asset.fileUrl &&
               asset.thumbnailUrl
             ) {
               uploadAsset(asset)
-              uploadFileAsset(asset.fileUrl)
               console.log('upLoadedAsset>>>>', asset)
             } else {
               alert('필수 항목을 다 채워 주세요.')
@@ -65,7 +66,7 @@ export default function Button({
         }
         break
     }
-    // uploadFileAsset(asset.createdAt.fileUrl)
+
   }
   return (
     <label htmlFor={id}>

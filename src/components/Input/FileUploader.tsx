@@ -38,7 +38,17 @@ export default function FileUploader({
         setValue(fileAsset.name)
         debounce(() => {
           console.log('debounce')
-          dispatch(createFileUrl(fileAsset))
+          const formData = new FormData()
+          console.log(fileAsset)
+
+          formData.append('file', fileAsset)
+          console.log(formData.get('file'))
+          // dispatch(createFileUrl(formData))
+          // console.log(formData)
+          // dispatch(createFileSize(fileSize))
+          console.log('formData', formData)
+
+          uploadFileAsset(formData)
         }, 5000)()
       }
     } else {
@@ -54,7 +64,13 @@ export default function FileUploader({
         className="rounded border border-[#474E57] bg-neutral-navy-950 px-[1.1rem] text-[1.4rem]"
         value={value}
       />
-      <input type="file" id="uploadBtn" className="hidden" onChange={uploadFileHandler} />
+      <input
+        type="file"
+        name="file"
+        id="uploadBtn"
+        className="hidden"
+        onChange={uploadFileHandler}
+      />
       <Button id="uploadBtn" type="none" width={13} height={4.2}>
         파일 선택
       </Button>

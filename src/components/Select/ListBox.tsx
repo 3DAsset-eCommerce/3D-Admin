@@ -1,15 +1,17 @@
 'use client'
-import React, { useState, ReactNode, Dispatch, SetStateAction, MouseEventHandler } from 'react'
+import React, { ReactNode, Dispatch, SetStateAction, MouseEventHandler } from 'react'
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit'
+import { useDispatch } from 'react-redux'
 import { Listbox } from '@headlessui/react'
 import { DropDownIcon } from '../../../public/icons/icons'
-
+import { debounce } from '@/utils/debounce'
 interface ListBoxProps {
   children?: ReactNode
-
   array: any[]
   selectedOption: string
   setSelectedOption: Dispatch<SetStateAction<string>>
   disabled?: boolean
+  dispatchFunc?: ActionCreatorWithPayload<any>
 }
 
 export default function ListBox({
@@ -18,9 +20,15 @@ export default function ListBox({
   selectedOption,
   setSelectedOption,
   disabled,
+  dispatchFunc,
 }: ListBoxProps) {
-  const handleOptionClick: MouseEventHandler = (e) => {
-    setSelectedOption(e.currentTarget.innerHTML)
+  const dispatch = useDispatch()
+  const handleOptionClick = (e: any) => {
+    setSelectedOption(e.target.innerText)
+    dispatchFunc &&
+      debounce(() => {
+        dispatch(dispatchFunc(e.target.innerText))
+      }, 5000)()
   }
 
   return (
@@ -36,7 +44,7 @@ export default function ListBox({
         </Listbox.Button>
         {!disabled && (
           <Listbox.Options className="absolute top-[4.2rem] z-10 rounded border border-[#474E57] bg-neutral-navy-950 text-[1.4rem]">
-            {array.map((item) => (
+            {array?.map((item) => (
               <Listbox.Option
                 key={item.index}
                 value={item}

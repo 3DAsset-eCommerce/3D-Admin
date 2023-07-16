@@ -3,7 +3,7 @@ import React, { useState, useRef, ChangeEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import { createThumbnailSrc, createPreviewUrlList } from '@/store/assetSlice'
 import { debounce } from '@/utils/debounce'
-
+import { uploadThumbnailAsset, uploadDetailPhotosAsset } from '@/api/service/asset'
 interface ImageUploaderProps {
   type: 'thumbnail' | 'detail'
   required: boolean
@@ -14,7 +14,7 @@ interface ImageUploaderProps {
 
 export default function ImageUploader({ type, required, width, height, id }: ImageUploaderProps) {
   const [isUploaded, setIsUploaded] = useState<boolean>(false)
-  const [url, setUrl] = useState<string>('')
+  const [url, setUrl] = useState<string | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const [imageName, setImageName] = useState<string>('')
   const [imageSize, setImageSize] = useState<number>(0)
@@ -27,22 +27,26 @@ export default function ImageUploader({ type, required, width, height, id }: Ima
       const imageSize = Number((image.size / 1024 ** 2).toFixed(2))
       //이미지 파일 사이즈가 10메가바이트 초과면,
       if (imageSize > 10) {
-        setUrl('')
+        setUrl(null)
         alert('최대 10MB까지 업로드 가능합니다.')
       } else {
         // 이미지 파일 사이즈가 10메가바이트 이하면,
-        const url = URL.createObjectURL(image)
+        const formData = new FormData()
+        const imageUrl = URL.createObjectURL(image)
         //이미지 업로드 상태 = 업로드 => X  버튼 나옴
         setIsUploaded(true)
+        setUrl(imageUrl)
         //선택한 이미지 파일 상자에 렌더
-        setUrl(url)
         //이미지 파일명과 사이즈 상자 밑에 렌더시키기
         setImageName(image.name)
         setImageSize(image.size)
         if (type === 'thumbnail') {
-          //2초 동안 아무 동작 없으면 그제서야 dispatch 하기
+          formData.append('file', image)
+          console.log(formData)
+          //2초 동안 아무 동작 없으면 그제서야 api 요청 보내기
           debounce(() => {
-            dispatch(createThumbnailSrc(url))
+            const res = uploadThumbnailAsset(formData)
+            console.log('thumbnailUploadUrl:', res)
           }, 5000)()
           console.log('thumbnailRedux')
         } else if (type === 'detail') {
@@ -58,7 +62,7 @@ export default function ImageUploader({ type, required, width, height, id }: Ima
   }
   const imageRemoveHandler = () => {
     setIsUploaded(false)
-    setUrl('')
+    setUrl(null)
   }
   return (
     <div className="flex flex-col">
@@ -89,6 +93,7 @@ export default function ImageUploader({ type, required, width, height, id }: Ima
       <input
         ref={inputRef}
         type="file"
+        name="file"
         required={required}
         accept="image/*"
         className="hidden"

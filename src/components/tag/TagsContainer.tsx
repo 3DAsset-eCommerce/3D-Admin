@@ -1,19 +1,19 @@
 'use client'
 import React, { useState } from 'react'
-import TextInput from '../Input/TextInput'
+import TextInput from '@/components/Input/TextInput'
 import TagChip from './TagChip'
 
 interface TagsContainerProps {
-  required:boolean
+  required: boolean
   tagList?: string[]
 }
 
-export default function TagsContainer({ required , tagList = [] }: TagsContainerProps) {
+export default function TagsContainer({ required, tagList = [] }: TagsContainerProps) {
   const [tagsArr, setTagsArr] = useState<string[]>(tagList)
   return (
     <>
       <TextInput
-      required={required}
+        required={required}
         width={38.8}
         placeholder="태그를 입력해주세요. (최대 10개)"
         tagsArr={tagsArr}
