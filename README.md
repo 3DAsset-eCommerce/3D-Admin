@@ -1,34 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 3D 자산거래 이커머스 백오피스
 
-## Getting Started
+## 💁🏻 프로젝트 소개
+<img src='https://github.com/3DAsset-eCommerce/3D-FE/assets/76941552/153146e6-402c-43cf-8a51-a5b1484c6771' width='600' height='700'/><br />
+> 3D-Asset 자산거래 이커머스 백오피스 메인페이지<br />
 
-First, run the development server:
+#### ⏰ 개발 기간
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+- 2023.06.18 ~ 2023. 06. 28
+
+<br/>
+
+#### 🔗 배포 사이트
+
+- [🦾 3D 자산거래 이커머스 백오피스🦾](https://neuroid-asset.vercel.app/)
+
+## 👥 팀원 소개
+| 이로운(팀장)                                                                                        | 이찬영(팀원)                                                                                 | 김영은(팀원)                                                                                                                                                                                                                                        |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | 
+| ![title](https://avatars.githubusercontent.com/u/76941552?v=4)                                     | ![title](https://avatars.githubusercontent.com/u/92348492?v=4)                               | ![title](https://avatars.githubusercontent.com/u/117294002?v=4)                              |
+| [@ronieo](https://github.com/ronieo)                                                          | [@dokimion24](https://github.com/dokimion24)                                                   | [@www-r](https://github.com/www-r)                                                    |                                                   |
+|📍로그인<br />📍CI/CD </br> | 📍초기세팅<br />|📍에셋등록<br />📍에셋수<br /> 📍결제<br /> 📍결제완료<br /> 📍위시리스트<br />                               | 
+| [이로운 작업 내역](https://github.com/3DAsset-eCommerce/3D-Admin/pulls?q=author%3Aronieo+) | [이찬영 작업 내역](https://github.com/3DAsset-eCommerce/3D-Admin/pulls?q=author%3Adokimion24) | [김영은 작업 내역](https://github.com/3DAsset-eCommerce/3D-Admin/pulls?q=author%3Awww-r) |
+
+
+## 💻 개발 환경
+### 🔧 스킬셋
+<!--![FE_skillset](https://github.com/3DAsset-eCommerce/3D-FE/assets/76941552/a0e3c0fd-0eee-45fe-9fd4-afaeb7c05a1d)-->
+<img src='https://github.com/3DAsset-eCommerce/3D-FE/assets/76941552/0b0622af-6adb-4414-a198-299fb81f70c7' width='550px' height='700px'/>
+
+<br /><br />
+
+### 📁 프로젝트 폴더 구조
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Neuroid-asset-Backoffice
+├─ next.config.js
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.js
+├─ README.md
+├─ src
+│  ├─ app
+│  │  └─ assets
+│  │  └─ layout.tsx
+│  │  └─ page.tsx
+│  ├─ components
+│  │  └─ Body
+│  │  └─ Button
+│  │  └─ Divider
+│  │  └─ Header
+│  │  └─ Input
+│  │  └─ Modal
+│  │  └─ TableContainer
+│  │  └─ TableItem
+│  │  └─ tag
+│  │  └─ SideNav.tsx
+│  ├─ styles
+│  │  └─ globals.css
+│  └─ utils
+├─ tailwind.config.js
+├─ tsconfig.json
+└─ yarn.lock
+```
+<br />
