@@ -19,7 +19,7 @@
 | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | 
 | ![title](https://avatars.githubusercontent.com/u/76941552?v=4)                                     | ![title](https://avatars.githubusercontent.com/u/92348492?v=4)                               | ![title](https://avatars.githubusercontent.com/u/117294002?v=4)                              |
 | [@ronieo](https://github.com/ronieo)                                                          | [@dokimion24](https://github.com/dokimion24)                                                   | [@www-r](https://github.com/www-r)                                                    |                                                   |
-|📍로그인<br />📍CI/CD </br> | 📍초기세팅<br />|📍에셋등록<br />📍에셋수<br /> 📍결제<br /> 📍결제완료<br /> 📍위시리스트<br />                               | 
+|📍로그인<br />📍CI/CD </br> | 📍초기세팅<br />|📍에셋등록<br />📍에셋수정<br />                              | 
 | [이로운 작업 내역](https://github.com/3DAsset-eCommerce/3D-Admin/pulls?q=author%3Aronieo+) | [이찬영 작업 내역](https://github.com/3DAsset-eCommerce/3D-Admin/pulls?q=author%3Adokimion24) | [김영은 작업 내역](https://github.com/3DAsset-eCommerce/3D-Admin/pulls?q=author%3Awww-r) |
 
 
