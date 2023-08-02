@@ -1,31 +1,114 @@
-"use client"
-import React, {useState} from 'react'
-
+'use client'
+import React, { useState, useRef, ChangeEvent } from 'react'
+import { useDispatch } from 'react-redux'
+import { createThumbnailSrc, createPreviewUrlList } from '@/store/assetSlice'
+import { debounce } from '@/utils/debounce'
+import { uploadFileAsset } from '@/api/service/asset'
 interface ImageUploaderProps {
-  width:number,
-  height:number,
+  type: 'thumbnail' | 'detail'
+  required: boolean
+  width: number
+  height: number
+  id: number
 }
 
-export default function ImageUploader({width, height, }:ImageUploaderProps) {
-  const [isUploaded, setIsUploaded] = useState(false)
-  const imageUploadHandler = () => {
-    setIsUploaded(true)
+export default function ImageUploader({ type, required, width, height, id }: ImageUploaderProps) {
+  const [isUploaded, setIsUploaded] = useState<boolean>(false)
+  const [url, setUrl] = useState<string | null>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [imageName, setImageName] = useState<string>('')
+  const [imageSize, setImageSize] = useState<number>(0)
+  const dispatch = useDispatch()
+  const imageUploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //이미지 파일이 존재할 때,
+    if (e.currentTarget.files !== null) {
+      const image = e.currentTarget.files[0]
+      const imageSize = Number((image.size / 1024 ** 2).toFixed(2))
+      //이미지 파일 사이즈가 10메가바이트 초과면,
+      if (imageSize > 10) {
+        setUrl(null)
+        alert('최대 10MB까지 업로드 가능합니다.')
+      } else {
+        // 이미지 파일 사이즈가 10메가바이트 이하면,
+        const formData = new FormData()
+        const imageUrl = URL.createObjectURL(image)
+        //이미지 업로드 상태 = 업로드 => X  버튼 나옴
+        setIsUploaded(true)
+        setUrl(imageUrl)
+        //선택한 이미지 파일 상자에 렌더
+        //이미지 파일명과 사이즈 상자 밑에 렌더시키기
+        setImageName(image.name)
+        setImageSize(image.size)
+        if (type === 'thumbnail') {
+          formData.append('file', image)
+          console.log(formData)
+          //2초 동안 아무 동작 없으면 그제서야 api 요청 보내기
+          debounce(async () => {
+            const res = await uploadFileAsset(formData, 'thumbnail')
+            const url = res.data.data.keyName
+            console.log('thumbnailRedux')
+            dispatch(createThumbnailSrc(url))
+          }, 5000)()
+        } else if (type === 'detail') {
+          debounce(async () => {
+            const res = await uploadFileAsset(formData, 'detail')
+            console.log(res.data.data.keyName)
+
+            // dispatch(createPreviewUrlList(urlList))
+          }, 5000)()
+          // console.log('detailImageSrcRedux')
+        }
+      }
+    } else {
+      alert('파일이 존재하지 않습니다.')
+    }
   }
   const imageRemoveHandler = () => {
     setIsUploaded(false)
+    setUrl(null)
   }
   return (
-    <>
-      <div style={{width: `${width}rem`, height: `${height}rem`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}} className='relative rounded border border-[#474E57] bg-neutral-navy-950 px-[2rem] flex justify-center items-center'>
-        <label htmlFor="imageUploadBtn"><span className='text-[6.4rem] hover:cursor-pointer'>+</span></label>
-        {isUploaded && <button className='absolute right-0 top-0 w-[4rem] h-[4rem] bg-[rgba(0,0,0,0.7)] text-neutral-navy-100' onClick={imageRemoveHandler}>X</button>}
+    <div className="flex flex-col">
+      <div
+        style={{ width: `${width}rem`, height: `${height}rem`, backgroundImage: `url(${url})` }}
+        className="relative flex items-center justify-center rounded border border-[#474E57] bg-neutral-navy-950 bg-cover bg-no-repeat px-[2rem]"
+      >
+        <label htmlFor={`imageUploadBtn${id}`}>
+          <span
+            className={
+              isUploaded
+                ? 'hidden px-[1rem] text-[6.4rem] hover:cursor-pointer'
+                : 'px-[1rem] text-[6.4rem]  text-neutral-navy-200 hover:cursor-pointer'
+            }
+          >
+            +
+          </span>
+        </label>
+        {isUploaded && (
+          <button
+            className="absolute right-0 top-0 h-[4rem] w-[4rem] bg-[rgba(0,0,0,0.7)] text-neutral-navy-100"
+            onClick={imageRemoveHandler}
+          >
+            X
+          </button>
+        )}
       </div>
-      <input type='file' accept="image/*" className='hidden' onChange={imageUploadHandler} id='imageUploadBtn'/>
+      <input
+        ref={inputRef}
+        type="file"
+        name="file"
+        required={required}
+        accept="image/*"
+        className="hidden"
+        onChange={imageUploadHandler}
+        id={`imageUploadBtn${id}`}
+      />
       {isUploaded && (
-      <div>
-        <p>{}</p>
-        <p>{}</p>
-      </div>)}
-    </>
+        <div className="ml-[0.5rem] mt-[1.2rem] w-[21.4rem]">
+          <p className="flex flex-wrap">{imageName}</p>
+          <p>{(imageSize / 1024 ** 2).toFixed(2)}MB</p>
+        </div>
+      )}
+    </div>
   )
 }

@@ -1,25 +1,89 @@
-"use client"
+'use client'
 
-import React, {ReactNode, useState} from 'react'
+import React, { MouseEventHandler, ReactNode } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store/store'
+import { uploadAsset, editAsset, uploadFileAsset, uploadDetailPhotosAsset, uploadThumbnailAsset } from '@/api/service/asset'
+import { AssetUploadRequest } from '@/api/interface/asset'
 
 interface ButtonProps {
-  width?: number,
-  height?: number,
-  backgroundColor?: string,
-  borderRadius?:number,
-  borderColor?: string,
-  color?: string,
-  id?:string
   children: ReactNode
+  type: 'fail' | 'success' | 'none'
+  label?: 'enroll' | 'edit' | 'search' | 'none'
+  width?: number
+  height?: number
+  backgroundColor?: string
+  borderRadius?: number
+  borderColor?: string
+  color?: string
+  id?: string
+  onClick?: MouseEventHandler
 }
 
-export default function Button({children, width=13, height= 3.6, backgroundColor='#237FDB',borderRadius=0.4, borderColor='transparent', color='#FFF', id}:ButtonProps) {
-  const [isClicked, setIsClicked] = useState(false)
+export default function Button({
+  children,
+  type,
+  label = 'none',
+  width = 13,
+  height = 3.6,
+  backgroundColor = '#237FDB',
+  borderRadius = 0.4,
+  borderColor = 'transparent',
+  color = '#FFF',
+  id,
+  onClick,
+}: ButtonProps) {
+  const asset = useSelector((state) => state.createAsset)
+
   const clickHandler = () => {
-    setIsClicked(!isClicked)
+    switch (type) {
+      case 'fail':
+        window.location.reload()
+        break
+      case 'success':
+        switch (label) {
+          case 'enroll':
+            if (
+              asset.assetName &&
+              asset.assetDescription &&
+              asset.price &&
+              asset.category &&
+              asset.fileUrl &&
+              asset.thumbnailUrl
+            ) {
+              uploadAsset(asset)
+              console.log('upLoadedAsset>>>>', asset)
+            } else {
+              alert('필수 항목을 다 채워 주세요.')
+              console.log('upLoadedFailAsset>>>>', asset)
+            }
+            break
+          case 'edit':
+            console.log('editDispatch>>>>', asset)
+            break
+          case 'search':
+            break
+        }
+        break
+    }
 
   }
   return (
-    <label htmlFor={id}><span style={{'width': `${width}rem`, height: `${height}rem`, backgroundColor:`${backgroundColor}`, borderColor: `${borderColor}`, color: `${color}`, borderRadius:`${borderRadius}rem`}} className={' py-[0.8rem] px-[3.2rem] border flex items-center justify-center hover:cursor-pointer '+`${isClicked && 'border-transparent-blue border text-neutral-navy-100'}`} onClick={clickHandler}>{children}</span></label>
+    <label htmlFor={id}>
+      <span
+        style={{
+          width: `${width}rem`,
+          height: `${height}rem`,
+          backgroundColor: `${backgroundColor}`,
+          borderColor: `${borderColor}`,
+          color: `${color}`,
+          borderRadius: `${borderRadius}rem`,
+        }}
+        className=" flex items-center justify-center border py-[0.8rem] hover:cursor-pointer "
+        onClick={type === 'none' ? onClick : clickHandler}
+      >
+        {children}
+      </span>
+    </label>
   )
 }

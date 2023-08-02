@@ -1,46 +1,76 @@
 'use client'
-
-import React, { ReactNode, useState, useRef, ChangeEvent } from 'react'
+import React, { ReactNode, useState, ChangeEvent } from 'react'
+import { useDispatch } from 'react-redux'
+import { UseSelector } from 'react-redux/es/hooks/useSelector'
 import Button from '../Button'
+import { createFileUrl, createFileExtension, createFileSize } from '@/store/assetSlice'
+import { uploadFileAsset } from '@/api/service/asset'
+import { debounce } from '@/utils/debounce'
 
 interface FileUploaderProps {
   inputWidth: number
   inputHeight?: number
   placeholder?: string
+  inputValue?: string //file url
+
   children?: ReactNode
 }
 
 export default function FileUploader({
+  children,
   inputWidth,
   inputHeight = 12,
-  children,
+  inputValue,
+  ...props
 }: FileUploaderProps) {
-  const inputRef = useRef<HTMLInputElement | null>(null)
-  const [placeholder, setPlaceholder] = useState('선택된 파일 없음')
+  const [value, setValue] = useState(inputValue ? inputValue : '선택된 파일 없음')
+  const dispatch = useDispatch()
 
-  const uploadFileHandler = (e: ChangeEvent) => {
+  const uploadFileHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
-    if (inputRef.current !== null) {
-      setPlaceholder(inputRef.current.value)
+    setValue('')
+    if (e.currentTarget.files !== null) {
+      const fileAsset = e.currentTarget.files[0]
+      const fileSize = Number((fileAsset.size / 1024 ** 2).toFixed(2))
+      if (fileSize > 10) {
+        alert('최대 10MB까지 업로드 가능합니다.')
+      } else {
+        setValue(fileAsset.name)
+        const formData = new FormData()
+        formData.append('file', fileAsset)
+        debounce(async () => {
+          console.log('debounce')
+
+          // console.log(formData)
+          // dispatch(createFileSize(fileSize))
+          const res = await uploadFileAsset(formData, 'fbx')
+          const url = res.data.data.keyName
+          console.log('returnedURL', url)
+          console.log(dispatch)
+          dispatch(createFileUrl(url))
+        }, 5000)()
+      }
+    } else {
+      alert('파일이 존재하지 않습니다.')
     }
   }
+
   return (
     <div className="relative flex gap-[0.8rem]">
       <input
         disabled
         style={{ width: `${inputWidth}rem`, height: `${inputHeight}rem` }}
         className="rounded border border-[#474E57] bg-neutral-navy-950 px-[1.1rem] text-[1.4rem]"
-        placeholder={placeholder}
+        value={value}
       />
       <input
-        ref={inputRef}
         type="file"
+        name="file"
         id="uploadBtn"
-        name="uploadBtn"
         className="hidden"
         onChange={uploadFileHandler}
       />
-      <Button id="uploadBtn" width={13} height={4.2}>
+      <Button id="uploadBtn" type="none" width={13} height={4.2}>
         파일 선택
       </Button>
       {children}
