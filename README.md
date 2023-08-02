@@ -12,7 +12,7 @@
 
 #### 🔗 배포 사이트
 
-- [🦾 3D 자산거래 이커머스 백오피스🦾](https://neuroid-asset.vercel.app/)
+- [🦾 3D 자산거래 이커머스 백오피스🦾](https://neuroid-asset-backoffice.netlify.app/)
 
 ## 👥 팀원 소개
 | 이로운(팀장)                                                                                        | 이찬영(팀원)                                                                                 | 김영은(팀원)                                                                                                                                                                                                                                        |
